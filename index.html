@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synapse AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <span class="icon">🧬</span> Synapse AI
+                </div>
+                <button id="theme-toggle" class="icon-btn" aria-label="Toggle Dark Mode">
+                    <svg class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="upload-section">
+                <button id="upload-btn" class="primary-btn full-width">
+                    + Upload PDF
+                </button>
+                <input type="file" id="file-input" hidden multiple accept=".pdf">
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="section-label">Active Documents</div>
+            <div class="file-list" id="file-list">
+                <div class="empty-state">No files loaded.</div>
+            </div>
+        </aside>
+
+        <main class="chat-area">
+            <div class="chat-feed" id="chat-feed">
+                <div class="start-screen">
+                    <h1>Ready to analyze.</h1>
+                    <p>Upload a document to begin. Data is processed locally.</p>
+                </div>
+            </div>
+
+            <div class="input-container">
+                <div class="input-box">
+                    <input type="text" id="user-input" placeholder="Ask a question..." autocomplete="off">
+                    <button id="send-btn" class="send-icon">➜</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>

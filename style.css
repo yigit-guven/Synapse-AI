@@ -1,0 +1,218 @@
+:root {
+    /* --- LIGHT MODE (Default Variables) --- */
+    --bg-app: #f3f4f6;       /* Light Grey Background */
+    --bg-panel: #ffffff;     /* White Sidebar/Panels */
+    --text-main: #1f2937;    /* Dark Grey Text */
+    --text-muted: #6b7280;   /* Light Grey Text */
+    --border: #e5e7eb;       /* Light Grey Border */
+    --accent: #2563eb;       /* Blue Accent */
+    --input-bg: #ffffff;     /* White Input Background */
+    --msg-user: #e5e7eb;     /* Light Grey Bubble */
+    --shadow: rgba(0, 0, 0, 0.05);
+}
+
+/* --- DARK MODE (Overrides) --- */
+body.dark-mode {
+    --bg-app: #18181b;       /* Very Dark Grey Background */
+    --bg-panel: #27272a;     /* Slightly Lighter Grey Panel */
+    --text-main: #f3f4f6;    /* White Text */
+    --text-muted: #9ca3af;   /* Muted Grey Text */
+    --border: #3f3f46;       /* Dark Grey Border */
+    --accent: #3b82f6;       /* Brighter Blue for Contrast */
+    --input-bg: #27272a;     /* Dark Grey Input Background */
+    --msg-user: #3f3f46;     /* Dark Grey Bubble */
+    --shadow: rgba(0, 0, 0, 0.5);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-app);
+    color: var(--text-main);
+    height: 100vh;
+    display: flex;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.app-container { display: flex; width: 100%; height: 100%; }
+
+/* --- SIDEBAR --- */
+.sidebar {
+    width: 280px;
+    background-color: var(--bg-panel);
+    border-right: 1px solid var(--border);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* THEME TOGGLE BUTTON */
+.icon-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-main); /* Uses main text color so it's visible in dark mode */
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.icon-btn:hover { background: var(--border); }
+.theme-icon { width: 20px; height: 20px; }
+
+/* BUTTONS */
+.primary-btn {
+    background-color: var(--text-main); /* Inverts automatically: Black in light, White in dark */
+    color: var(--bg-panel);
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: opacity 0.2s;
+}
+.primary-btn:hover { opacity: 0.8; }
+.full-width { width: 100%; }
+
+.divider { height: 1px; background-color: var(--border); margin: 20px 0; }
+
+.section-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.file-list { flex: 1; overflow-y: auto; }
+.empty-state { font-size: 0.85rem; color: var(--text-muted); font-style: italic; }
+
+.file-item {
+    font-size: 0.9rem;
+    padding: 10px;
+    background-color: var(--bg-app); /* Matches main background */
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    border-radius: 6px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* --- MAIN CHAT AREA --- */
+.chat-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color: var(--bg-panel); /* Ensures main area changes color */
+    transition: background-color 0.3s;
+}
+
+.chat-feed {
+    flex: 1;
+    padding: 40px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.start-screen {
+    margin-top: 15vh;
+    text-align: center;
+    color: var(--text-muted);
+}
+.start-screen h1 { color: var(--text-main); margin-bottom: 10px; }
+
+/* MESSAGES */
+.message-row {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    gap: 15px;
+}
+.message-row.user { justify-content: flex-end; }
+
+.bubble {
+    padding: 14px 18px;
+    border-radius: 12px;
+    line-height: 1.5;
+    max-width: 80%;
+    color: var(--text-main); /* Ensures text is visible */
+}
+
+.user .bubble {
+    background-color: var(--msg-user);
+}
+
+.bot .bubble {
+    background-color: transparent;
+    padding-left: 0;
+}
+
+/* INPUT AREA */
+.input-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: transparent;
+}
+
+.input-box {
+    display: flex;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 6px;
+    background-color: var(--input-bg);
+    box-shadow: 0 4px 20px var(--shadow);
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.input-box input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 14px;
+    font-size: 1rem;
+    background: transparent;
+    color: var(--text-main); /* Crucial for typing visibility */
+}
+
+.send-icon {
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    width: 44px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
