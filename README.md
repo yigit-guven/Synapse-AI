@@ -1,4 +1,4 @@
-# 🧠 Synapse AI
+# Synapse AI
 
 **High-Performance, Self-Hosted Document Intelligence Engine**
 
@@ -6,11 +6,11 @@
 
 ---
 
-## 🧬 Core Philosophy: Zero-Leakage Intelligence
+## Core Philosophy: Zero-Leakage Intelligence
 
 Most AI solutions sacrifice data sovereignty for ease of use. Synapse AI is built on the principle of **Data Sovereignty**. It is deployed exclusively on private Virtual Private Servers (VPS), ensuring that proprietary lore, legal documents, and sensitive business data never leave your controlled environment.
 
-## 🛠️ Technical Architecture
+## Technical Architecture
 
 The system operates through a multi-stage neural pipeline optimized for restricted hardware:
 
@@ -21,35 +21,36 @@ The system operates through a multi-stage neural pipeline optimized for restrict
 
 $$\text{Similarity}(A, B) = \frac{A \cdot B}{\|A\| \|B\|}$$
 
-## 🚀 Key Features
+## Key Features
 
-* **Self-Sovereign Data**: Complete root-access control on Linux-based VPS environments.
-* **Dynamic Knowledge Injection**: Real-time PDF uploading and index refreshing via a Streamlit dashboard.
-* **Agentic Decision Support**: Engineered for complex reasoning tasks, from gaming lore consistency to regulatory compliance.
-* **GPU/CPU Optimized**: Lightweight containerized deployment via Docker.
+*   **Self-Sovereign Data**: Complete root-access control on Linux-based VPS environments.
+*   **Dynamic Knowledge Injection**: Real-time PDF uploading and index refreshing via a Streamlit dashboard.
+*   **Agentic Decision Support**: Engineered for complex reasoning tasks, from gaming lore consistency to regulatory compliance.
+*   **GPU/CPU Optimized**: Lightweight containerized deployment via Docker.
 
-## 🇩🇪 Business & Legal Utility
+## Business & Legal Utility
 
 Designed with the German startup ecosystem in mind, Synapse AI facilitates Intelligent Document Processing (IDP) for:
-* **Regulatory Auditing**: Rapid analysis of *Aufenthaltstitel* (Residence Permit) requirements and legal frameworks.
-* **Financial Analysis**: Automated reporting on revenue streams from platforms like Roblox and Curseforge.
-* **Technical Documentation**: Ensuring architectural consistency for large-scale projects like "Mundus Online."
 
-## 💻 Tech Stack
+*   **Regulatory Auditing**: Rapid analysis of *Aufenthaltstitel* (Residence Permit) requirements and legal frameworks.
+*   **Financial Analysis**: Automated reporting on revenue streams from platforms like Roblox and Curseforge.
+*   **Technical Documentation**: Ensuring architectural consistency for large-scale projects.
 
-* **Language**: Python 3.10+
-* **Vector Database**: ChromaDB
-* **Inference Engine**: Ollama (Llama 3 / Mistral)
-* **Frontend**: Streamlit
-* **Containerization**: Docker & Docker Compose
+## Tech Stack
 
-## 📦 Installation & Usage
+*   **Language**: Python 3.10+
+*   **Vector Database**: ChromaDB
+*   **Inference Engine**: Ollama (Llama 3 / Mistral)
+*   **Frontend**: Streamlit
+*   **Containerization**: Docker & Docker Compose
+
+## Installation & Usage
 
 *(Coming Soon: Detailed Docker setup instructions)*
 
 1.  **Clone the repository**
     ```bash
-    git clone [https://github.com/yigit-guven/Synapse-AI.git](https://github.com/yigit-guven/Synapse-AI.git)
+    git clone https://github.com/yigit-guven/Synapse-AI.git
     cd Synapse-AI
     ```
 
@@ -64,13 +65,18 @@ Designed with the German startup ecosystem in mind, Synapse AI facilitates Intel
     pip install -r requirements.txt
     ```
 
-## 🤝 Contributing
+## Contributing
 
 Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to submit pull requests to this project.
 
-## 🛡️ Security
+## Security
 
 For security concerns, please refer to [SECURITY.md](SECURITY.md).
 
 ---
-*"Synapse AI isn't just a reader; it's the firing neural connection between your data and your decisions."*
+
+*"Synapse AI isn't just a reader; it's the connection between your data and your decisions."*
+
+<div align="center">
+  <p>Developed with ❤️ by <a href="https://github.com/yigit-guven">Yigit Guven</a> & <a href="https://github.com/JoniDani1">Joni Dani</a></p>
+</div>

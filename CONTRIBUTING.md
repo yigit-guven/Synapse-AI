@@ -1,36 +1,34 @@
 # Contributing to Synapse AI
 
-First off, thank you for considering contributing to Synapse AI! We are a small team building a robust, self-hosted RAG infrastructure, and we welcome help from the community.
+We welcome contributions to Synapse AI. This document outlines the process for contributing to the project, including reporting bugs, suggesting enhancements, and submitting pull requests.
 
-## 🤝 How to Contribute
+## How to Contribute
 
 ### 1. Reporting Bugs
-If you find a bug, please create a GitHub Issue. Be sure to include:
-* A descriptive title.
-* Steps to reproduce the error.
-* Expected vs. actual behavior.
-* Your environment details (OS, Python version, Hardware).
+If you encounter a bug, please create a GitHub Issue with the following details:
+*   **Title**: A concise description of the issue.
+*   **Reproduction**: Step-by-step instructions to reproduce the error.
+*   **Behavior**: A description of expected versus actual behavior.
+*   **Environment**: Operating System, Python version, and hardware specifications.
 
 ### 2. Suggesting Enhancements
-We welcome ideas for new features, especially those focused on:
-* Optimizing RAG performance on low-resource hardware.
-* Better handling of German language nuances.
-* New document parsers.
+We welcome proposals for new features, particularly those that align with our core goals:
+*   Optimization of RAG performance on low-resource hardware.
+*   Enhanced handling of documents.
+*   Implementation of new document parsers.
 
 ### 3. Pull Request Process
-1.  Fork the repository and create your branch from `main`.
-2.  If you've added code that should be tested, add tests.
-3.  Ensure your code follows our style guide (see below).
-4.  Make sure your code lints.
-5.  Issue that pull request!
+1.  Fork the repository and create a feature branch from `main`.
+2.  If the change adds new functionality, include appropriate tests.
+3.  Ensure the code adheres to the style guide.
+4.  Verify that all linting checks pass.
+5.  Submit the pull request for review.
 
-## 💻 Development Standards
+## Development Standards
 
-* **Code Style**: We follow **PEP 8** standards for Python code.
-* **Documentation**: All new functions and classes must have docstrings explaining their purpose, arguments, and return values.
-* **Commit Messages**: Write clear, concise commit messages. Start with a verb (e.g., "Add PDF parser," "Fix vector dimension mismatch").
+*   **Code Style**: Adhere to **PEP 8** standards for all Python code.
+*   **Documentation**: Ensure all new functions and classes include docstrings detailing their purpose, arguments, and return values.
+*   **Commit Messages**: Use clear, imperative mood commit messages (e.g., "Add PDF parser", "Fix vector dimension mismatch").
 
-## 🧪 Testing
-Before submitting a PR, please run the test suite (instructions to be added as project matures) to ensure no regressions.
-
-Thank you for helping us build the future of private document intelligence!
+## Testing
+Before submitting a pull request, run the test suite to ensure no regressions are introduced. Detailed testing instructions will be provided as the project infrastructure matures.
