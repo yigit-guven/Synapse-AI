@@ -12,7 +12,6 @@ The easiest way to deploy is using our setup script.
     chmod +x setup_vps.sh
     ./setup_vps.sh
     ```
-    *Note: If the repo is private or you haven't pushed yet, you can copy the script content manually.*
 
 ## Manual Installation
 
