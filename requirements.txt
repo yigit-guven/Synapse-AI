@@ -6,3 +6,4 @@ pypdf>=4.1.0
 sentence-transformers>=2.5.1
 python-dotenv>=1.0.1
 beautifulsoup4>=4.12.3
+langchain-text-splitters>=0.0.1
