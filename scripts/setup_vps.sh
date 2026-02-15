@@ -50,13 +50,14 @@ else
     cd "$REPO_DIR"
 fi
 
-# 5. Start Ollama (in background if needed)
-echo "🦙 Checking Ollama service..."
-if ! pgrep -x "ollama" > /dev/null; then
-    echo "   Starting Ollama..."
-    ollama serve &
-    sleep 5
-fi
+# 5. Configure Ollama to listen on all interfaces
+echo "🦙 Configuring Ollama to listen on 0.0.0.0..."
+sudo mkdir -p /etc/systemd/system/ollama.service.d
+echo "[Service]
+Environment=\"OLLAMA_HOST=0.0.0.0\"" | sudo tee /etc/systemd/system/ollama.service.d/environment.conf > /dev/null
+
+sudo systemctl daemon-reload
+sudo systemctl restart ollama
 
 # 6. Deploy with Docker Compose
 echo "🚀 Deploying Synapse AI..."
