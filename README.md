@@ -6,6 +6,16 @@
 
 ---
 
+## 🚀 Live Demo
+
+Try the public demo version here: **[http://144.34.87.24:8501/](http://144.34.87.24:8501/)**
+
+> [!WARNING]
+> **Shared Environment**: This demo uses a shared database. **DO NOT** upload sensitive data.
+> Please read the [Privacy Policy](PRIVACY_POLICY.md) before use.
+
+---
+
 ## Core Philosophy: Zero-Leakage Intelligence
 
 Most AI solutions sacrifice data sovereignty for ease of use. Synapse AI is built on the principle of **Data Sovereignty**. It is deployed exclusively on private Virtual Private Servers (VPS), ensuring that proprietary lore, legal documents, and sensitive business data never leave your controlled environment.
