@@ -62,6 +62,13 @@ with st.sidebar:
         settings.OLLAMA_BASE_URL = ollama_url
     
     st.markdown("---")
+    if st.button("🗑️ Reset Database", type="primary"):
+        with st.spinner("Clearing database..."):
+            st.session_state.vector_store.clear()
+            st.success("Database cleared!")
+            st.rerun()
+    
+    st.markdown("---")
     st.subheader("Document Ingestion")
     uploaded_file = st.file_uploader("Upload PDF", type=["pdf"])
     

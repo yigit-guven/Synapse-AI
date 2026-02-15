@@ -7,7 +7,10 @@ import chromadb
 
 class VectorStore:
     def __init__(self):
-        self.embedding_function = SentenceTransformerEmbeddings(model_name=settings.EMBEDDING_MODEL)
+        self.embedding_function = SentenceTransformerEmbeddings(
+            model_name=settings.EMBEDDING_MODEL,
+            model_kwargs={"device": "cpu"}
+        )
         self.persist_directory = settings.CHROMA_PERSIST_DIRECTORY
         
         # Initialize client but let LangChain handle the collection interactions for simplicity
@@ -33,4 +36,22 @@ class VectorStore:
         return self.db.similarity_search(query, k=k)
 
     def as_retriever(self):
-        return self.db.as_retriever()
+        # Use MMR (Maximal Marginal Relevance) to improve diversity and reduce duplicates
+        return self.db.as_retriever(
+            search_type="mmr",
+            search_kwargs={
+                "k": 5,
+                "fetch_k": 20,
+                "lambda_mult": 0.5
+            }
+        )
+
+    def clear(self):
+        """
+        Clears the vector store.
+        """
+        self.db.delete_collection()
+        self.db = Chroma(
+            persist_directory=self.persist_directory,
+            embedding_function=self.embedding_function
+        )

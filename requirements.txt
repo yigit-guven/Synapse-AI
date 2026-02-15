@@ -5,6 +5,7 @@ langchain-community==0.0.38
 langchain-core==0.1.52
 langchain-text-splitters==0.0.1
 pypdf==4.1.0
-sentence-transformers==2.6.1
+sentence-transformers>=3.0.0
+transformers>=4.40.0
 python-dotenv==1.0.1
 beautifulsoup4==4.12.3
