@@ -18,7 +18,7 @@ try:
     from src.core.llm import get_llm
     print("LLM module loaded.")
 
-    from src.app import main
+    from src.api import app
     print("App module loaded.")
     
     print("All imports successful!")
