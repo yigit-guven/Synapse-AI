@@ -1,30 +1,50 @@
 :root {
     /* --- LIGHT MODE (Default Variables) --- */
-    --bg-app: #f3f4f6;       /* Light Grey Background */
-    --bg-panel: #ffffff;     /* White Sidebar/Panels */
-    --text-main: #1f2937;    /* Dark Grey Text */
-    --text-muted: #6b7280;   /* Light Grey Text */
-    --border: #e5e7eb;       /* Light Grey Border */
-    --accent: #2563eb;       /* Blue Accent */
-    --input-bg: #ffffff;     /* White Input Background */
-    --msg-user: #e5e7eb;     /* Light Grey Bubble */
+    --bg-app: #f3f4f6;
+    /* Light Grey Background */
+    --bg-panel: #ffffff;
+    /* White Sidebar/Panels */
+    --text-main: #1f2937;
+    /* Dark Grey Text */
+    --text-muted: #6b7280;
+    /* Light Grey Text */
+    --border: #e5e7eb;
+    /* Light Grey Border */
+    --accent: #2563eb;
+    /* Blue Accent */
+    --input-bg: #ffffff;
+    /* White Input Background */
+    --msg-user: #e5e7eb;
+    /* Light Grey Bubble */
     --shadow: rgba(0, 0, 0, 0.05);
 }
 
 /* --- DARK MODE (Overrides) --- */
 body.dark-mode {
-    --bg-app: #18181b;       /* Very Dark Grey Background */
-    --bg-panel: #27272a;     /* Slightly Lighter Grey Panel */
-    --text-main: #f3f4f6;    /* White Text */
-    --text-muted: #9ca3af;   /* Muted Grey Text */
-    --border: #3f3f46;       /* Dark Grey Border */
-    --accent: #3b82f6;       /* Brighter Blue for Contrast */
-    --input-bg: #27272a;     /* Dark Grey Input Background */
-    --msg-user: #3f3f46;     /* Dark Grey Bubble */
+    --bg-app: #18181b;
+    /* Very Dark Grey Background */
+    --bg-panel: #27272a;
+    /* Slightly Lighter Grey Panel */
+    --text-main: #f3f4f6;
+    /* White Text */
+    --text-muted: #9ca3af;
+    /* Muted Grey Text */
+    --border: #3f3f46;
+    /* Dark Grey Border */
+    --accent: #3b82f6;
+    /* Brighter Blue for Contrast */
+    --input-bg: #27272a;
+    /* Dark Grey Input Background */
+    --msg-user: #3f3f46;
+    /* Dark Grey Bubble */
     --shadow: rgba(0, 0, 0, 0.5);
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 body {
     font-family: 'Inter', sans-serif;
@@ -35,7 +55,11 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.app-container { display: flex; width: 100%; height: 100%; }
+.app-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
 
 /* --- SIDEBAR --- */
 .sidebar {
@@ -57,18 +81,62 @@ body {
 
 .logo {
     font-weight: 700;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: var(--text-main);
     display: flex;
     align-items: center;
+    gap: 12px;
+}
+
+.logo-img {
+    width: 32px;
+    height: 32px;
+}
+
+/* ... (existing styles) ... */
+
+/* SIDEBAR FOOTER */
+.sidebar-footer {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.footer-links {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
     gap: 8px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: var(--accent);
+}
+
+.separator {
+    color: var(--border);
+}
+
+.credits {
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+
+.disclaimer {
+    font-size: 0.7rem;
+    line-height: 1.3;
+    opacity: 0.8;
 }
 
 /* THEME TOGGLE BUTTON */
 .icon-btn {
     background: transparent;
     border: none;
-    color: var(--text-main); /* Uses main text color so it's visible in dark mode */
+    color: var(--text-main);
+    /* Uses main text color so it's visible in dark mode */
     cursor: pointer;
     padding: 8px;
     border-radius: 50%;
@@ -78,12 +146,19 @@ body {
     transition: background 0.2s;
 }
 
-.icon-btn:hover { background: var(--border); }
-.theme-icon { width: 20px; height: 20px; }
+.icon-btn:hover {
+    background: var(--border);
+}
+
+.theme-icon {
+    width: 20px;
+    height: 20px;
+}
 
 /* BUTTONS */
 .primary-btn {
-    background-color: var(--text-main); /* Inverts automatically: Black in light, White in dark */
+    background-color: var(--text-main);
+    /* Inverts automatically: Black in light, White in dark */
     color: var(--bg-panel);
     border: none;
     padding: 12px;
@@ -93,10 +168,20 @@ body {
     font-size: 0.9rem;
     transition: opacity 0.2s;
 }
-.primary-btn:hover { opacity: 0.8; }
-.full-width { width: 100%; }
 
-.divider { height: 1px; background-color: var(--border); margin: 20px 0; }
+.primary-btn:hover {
+    opacity: 0.8;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.divider {
+    height: 1px;
+    background-color: var(--border);
+    margin: 20px 0;
+}
 
 .section-label {
     font-size: 0.75rem;
@@ -106,13 +191,22 @@ body {
     margin-bottom: 12px;
 }
 
-.file-list { flex: 1; overflow-y: auto; }
-.empty-state { font-size: 0.85rem; color: var(--text-muted); font-style: italic; }
+.file-list {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.empty-state {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
 
 .file-item {
     font-size: 0.9rem;
     padding: 10px;
-    background-color: var(--bg-app); /* Matches main background */
+    background-color: var(--bg-app);
+    /* Matches main background */
     border: 1px solid var(--border);
     color: var(--text-main);
     border-radius: 6px;
@@ -128,7 +222,8 @@ body {
     display: flex;
     flex-direction: column;
     position: relative;
-    background-color: var(--bg-panel); /* Ensures main area changes color */
+    background-color: var(--bg-panel);
+    /* Ensures main area changes color */
     transition: background-color 0.3s;
 }
 
@@ -146,7 +241,11 @@ body {
     text-align: center;
     color: var(--text-muted);
 }
-.start-screen h1 { color: var(--text-main); margin-bottom: 10px; }
+
+.start-screen h1 {
+    color: var(--text-main);
+    margin-bottom: 10px;
+}
 
 /* MESSAGES */
 .message-row {
@@ -156,14 +255,18 @@ body {
     display: flex;
     gap: 15px;
 }
-.message-row.user { justify-content: flex-end; }
+
+.message-row.user {
+    justify-content: flex-end;
+}
 
 .bubble {
     padding: 14px 18px;
     border-radius: 12px;
     line-height: 1.5;
     max-width: 80%;
-    color: var(--text-main); /* Ensures text is visible */
+    color: var(--text-main);
+    /* Ensures text is visible */
 }
 
 .user .bubble {
@@ -201,7 +304,8 @@ body {
     padding: 14px;
     font-size: 1rem;
     background: transparent;
-    color: var(--text-main); /* Crucial for typing visibility */
+    color: var(--text-main);
+    /* Crucial for typing visibility */
 }
 
 .send-icon {
@@ -215,4 +319,70 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* STOP BUTTON */
+.stop-btn {
+    background-color: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+}
+
+.stop-btn:hover {
+    background-color: var(--border);
+}
+
+/* MODAL */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+}
+
+.modal-content {
+    background-color: var(--bg-panel);
+    margin: 15% auto;
+    padding: 30px;
+    border: 1px solid var(--border);
+    width: 90%;
+    max-width: 500px;
+    border-radius: 12px;
+    position: relative;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
+}
+
+.close-modal {
+    color: var(--text-muted);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-modal:hover {
+    color: var(--text-main);
+}
+
+.modal h2 {
+    margin-bottom: 15px;
+}
+
+.modal p {
+    margin-bottom: 10px;
+    line-height: 1.5;
+    font-size: 0.9rem;
 }
