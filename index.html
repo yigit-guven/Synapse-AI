@@ -43,21 +43,20 @@
             <div class="file-list" id="file-list">
                 <div class="empty-state">No files loaded.</div>
             </div>
-        </aside>
 
-        <div class="sidebar-footer">
-            <div class="footer-links">
-                <a href="https://github.com/yigit-guven/Synapse-AI" target="_blank">GitHub</a>
-                <span class="separator">•</span>
-                <a href="#" id="legal-link">Legal</a>
+            <div class="sidebar-footer">
+                <div class="footer-links">
+                    <a href="https://github.com/yigit-guven/Synapse-AI" target="_blank">GitHub</a>
+                    <span class="separator">•</span>
+                    <a href="#" id="legal-link">Legal</a>
+                </div>
+                <div class="credits">
+                    Developed by Yiğit Güven & Joni Dani
+                </div>
+                <div class="disclaimer">
+                    Synapse AI processes data locally. Chat history is stored in your browser.
+                </div>
             </div>
-            <div class="credits">
-                Developed by Yiğit Güven
-            </div>
-            <div class="disclaimer">
-                Synapse AI processes data locally. Chat history is stored in your browser.
-            </div>
-        </div>
         </aside>
 
         <main class="chat-area">
@@ -69,9 +68,12 @@
                 </div>
             </div>
 
+            <div class="typing-indicator" id="typing-indicator" style="display: none;">
+                <span></span><span></span><span></span>
+            </div>
+
             <div class="input-container">
-                <div class="input-actions" id="input-actions"
-                    style="display: none; justify-content: center; margin-bottom: 10px;">
+                <div class="input-actions" id="input-actions" style="display: none;">
                     <button id="stop-btn" class="stop-btn">
                         ⏹ Stop Generating
                     </button>
@@ -92,7 +94,7 @@
             <p>This application is provided "as is", without warranty of any kind.</p>
             <p><strong>Data Privacy:</strong> Documents uploaded are processed locally. Chat history is stored in your
                 browser's local storage.</p>
-            <p><strong>License:</strong> MIT License.</p>
+            <p><strong>License:</strong> GNU General Public License v3 (GPLv3).</p>
         </div>
     </div>
 

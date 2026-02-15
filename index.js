@@ -9,6 +9,7 @@ const startScreen = document.querySelector('.start-screen');
 const themeToggle = document.getElementById('theme-toggle');
 const stopBtn = document.getElementById('stop-btn');
 const inputActions = document.getElementById('input-actions');
+const typingIndicator = document.getElementById('typing-indicator');
 const legalLink = document.getElementById('legal-link');
 const legalModal = document.getElementById('legal-modal');
 const closeModal = document.querySelector('.close-modal');
@@ -69,14 +70,15 @@ fileInput.addEventListener('change', async (e) => {
     });
 
     try {
-        const loadingId = showLoading("Ingesting documents...");
+        // Show loading via bubble for upload
+        const loadingId = showLoadingBubble("Ingesting documents...");
 
         const response = await fetch('/api/ingest', {
             method: 'POST',
             body: formData
         });
 
-        removeLoading(loadingId);
+        removeLoadingBubble(loadingId);
 
         if (!response.ok) throw new Error('Ingestion failed');
 
@@ -104,7 +106,6 @@ if (resetBtn) {
             if (!response.ok) throw new Error('Reset failed');
 
             fileList.innerHTML = '<div class="empty-state">No files loaded.</div>';
-            // Chat history is PRESERVED (no chatFeed.innerHTML = '')
             addMessage('🗑️ Knowledge base cleared. Chats preserved.', 'bot');
         } catch (error) {
             alert(`Error: ${error.message}`);
@@ -123,11 +124,12 @@ async function handleSend() {
     addMessage(text, 'user');
     userInput.value = '';
 
-    // 2. Loading State
-    const loadingId = showLoading();
-
-    // Show Stop Button
+    // 2. Show Typing Indicator and Actions
+    if (typingIndicator) typingIndicator.style.display = 'flex';
     if (inputActions) inputActions.style.display = 'flex';
+
+    // Scroll to bottom
+    chatFeed.scrollTop = chatFeed.scrollHeight;
 
     abortController = new AbortController();
 
@@ -139,7 +141,8 @@ async function handleSend() {
             signal: abortController.signal
         });
 
-        removeLoading(loadingId);
+        // Hide Typing Indicator
+        if (typingIndicator) typingIndicator.style.display = 'none';
 
         if (!response.ok) {
             const err = await response.json();
@@ -151,7 +154,8 @@ async function handleSend() {
         addMessage(markdown, 'bot', true);
 
     } catch (error) {
-        removeLoading(loadingId);
+        if (typingIndicator) typingIndicator.style.display = 'none';
+
         if (error.name === 'AbortError') {
             addMessage('🛑 Generation stopped by user.', 'bot');
         } else {
@@ -200,7 +204,8 @@ function addMessage(text, sender, isHtml = false) {
     });
 }
 
-function showLoading(text = "Processing...") {
+// Helper for upload loading state (separate from main chat typing)
+function showLoadingBubble(text = "Processing...") {
     const id = 'loading-' + Date.now();
     const row = document.createElement('div');
     row.classList.add('message-row', 'bot');
@@ -211,7 +216,7 @@ function showLoading(text = "Processing...") {
     return id;
 }
 
-function removeLoading(id) {
+function removeLoadingBubble(id) {
     const element = document.getElementById(id);
     if (element) element.remove();
 }

@@ -64,7 +64,7 @@ body {
 /* --- SIDEBAR --- */
 .sidebar {
     width: 280px;
-    background-color: var(--bg-panel);
+    background: linear-gradient(180deg, var(--bg-panel) 0%, var(--bg-app) 100%);
     border-right: 1px solid var(--border);
     padding: 24px;
     display: flex;
@@ -92,8 +92,6 @@ body {
     width: 32px;
     height: 32px;
 }
-
-/* ... (existing styles) ... */
 
 /* SIDEBAR FOOTER */
 .sidebar-footer {
@@ -262,20 +260,65 @@ body {
 
 .bubble {
     padding: 14px 18px;
-    border-radius: 12px;
-    line-height: 1.5;
+    border-radius: 16px;
+    line-height: 1.6;
     max-width: 80%;
     color: var(--text-main);
-    /* Ensures text is visible */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .user .bubble {
-    background-color: var(--msg-user);
+    background-color: var(--accent);
+    color: white;
+    border-bottom-right-radius: 4px;
 }
 
 .bot .bubble {
-    background-color: transparent;
-    padding-left: 0;
+    background-color: var(--bg-app);
+    /* Use slightly distinct bg for bot */
+    border-bottom-left-radius: 4px;
+    border: 1px solid var(--border);
+}
+
+/* TYPING INDICATOR */
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 10px;
+    margin: 0 auto;
+    width: fit-content;
+}
+
+.typing-indicator span {
+    width: 8px;
+    height: 8px;
+    background-color: var(--text-muted);
+    border-radius: 50%;
+    display: inline-block;
+    animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.typing-indicator span:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.typing-indicator span:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+
+    0%,
+    80%,
+    100% {
+        transform: scale(0);
+    }
+
+    40% {
+        transform: scale(1);
+    }
 }
 
 /* INPUT AREA */
@@ -305,7 +348,6 @@ body {
     font-size: 1rem;
     background: transparent;
     color: var(--text-main);
-    /* Crucial for typing visibility */
 }
 
 .send-icon {
@@ -319,13 +361,20 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: transform 0.1s;
+}
+
+.send-icon:active {
+    transform: scale(0.95);
 }
 
 /* STOP BUTTON */
 .stop-btn {
-    background-color: transparent;
+    background-color: var(--bg-panel);
+    /* Ensure it has a bg */
     border: 1px solid var(--border);
-    color: var(--text-main);
+    color: #ef4444;
+    /* Red text for stop */
     padding: 8px 16px;
     border-radius: 20px;
     font-size: 0.85rem;
@@ -334,10 +383,12 @@ body {
     align-items: center;
     gap: 6px;
     transition: all 0.2s;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .stop-btn:hover {
-    background-color: var(--border);
+    background-color: #fef2f2;
+    border-color: #ef4444;
 }
 
 /* MODAL */
@@ -363,6 +414,7 @@ body {
     border-radius: 12px;
     position: relative;
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
+    color: var(--text-main);
 }
 
 .close-modal {
