@@ -1,8 +1,8 @@
 # Security Policy
 
-## Core Philosophy: Zero-Leakage
+## Core Philosophy: Data Sovereignty
 
-Synapse AI is designed with a "Zero-Leakage" philosophy. The primary security feature of this software is that **it does not require external API calls** to third-party model providers for inference or embedding. All data processing happens locally on your machine or private VPS.
+Synapse AI is designed with a "Data Sovereignty" philosophy. The primary security feature of this software is that **it does not require external API calls** to third-party model providers for inference or embedding. All data processing happens locally on your machine or private VPS.
 
 ## Supported Versions
 

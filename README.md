@@ -2,11 +2,11 @@
 
 **High-Performance, Self-Hosted Document Intelligence Engine**
 
-**Synapse AI** is an enterprise-grade RAG (Retrieval-Augmented Generation) infrastructure designed to bridge the gap between static unstructured data and actionable machine intelligence. By leveraging local Large Language Models (LLMs) and vector-based semantic search, Synapse AI transforms private document repositories into interactive, queryable knowledge bases.
+Synapse AI is an enterprise-grade RAG (Retrieval-Augmented Generation) infrastructure designed to bridge the gap between static unstructured data and actionable machine intelligence. By leveraging local Large Language Models (LLMs) and vector-based semantic search, Synapse AI transforms private document repositories into interactive, queryable knowledge bases.
 
 ---
 
-## 🚀 Live Demo
+## Live Demo
 
 Try the public demo version here: **[http://144.34.87.24:8501/](http://144.34.87.24:8501/)**
 
@@ -16,7 +16,7 @@ Try the public demo version here: **[http://144.34.87.24:8501/](http://144.34.87
 
 ---
 
-## Core Philosophy: Zero-Leakage Intelligence
+## Core Philosophy: Data Sovereignty
 
 Most AI solutions sacrifice data sovereignty for ease of use. Synapse AI is built on the principle of **Data Sovereignty**. It is deployed exclusively on private Virtual Private Servers (VPS), ensuring that proprietary lore, legal documents, and sensitive business data never leave your controlled environment.
 
@@ -56,7 +56,7 @@ Designed with the German startup ecosystem in mind, Synapse AI facilitates Intel
 
 ## Installation & Usage
 
-### 🐳 Docker Quick Start (Recommended)
+### Docker Quick Start (Recommended)
 
 1.  **Clone the repository**
     ```bash
@@ -70,7 +70,7 @@ Designed with the German startup ecosystem in mind, Synapse AI facilitates Intel
     ```
     Access the UI at `http://localhost:8501`.
 
-### 🛠️ Manual Installation
+### Manual Installation
 
 1.  **Clone the repository**
     ```bash
