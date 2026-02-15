@@ -24,8 +24,8 @@ COPY . .
 EXPOSE 8501
 
 # Healthcheck
-HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health || exit 1
+HEALTHCHECK CMD curl --fail http://localhost:8501/ || exit 1
 
 # Run the application
 ENV PYTHONPATH=/app
-CMD ["streamlit", "run", "src/app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+CMD ["uvicorn", "src.api:app", "--host", "0.0.0.0", "--port", "8501"]

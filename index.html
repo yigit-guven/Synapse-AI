@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Synapse AI</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
+
 <body>
 
     <div class="app-container">
@@ -21,12 +24,17 @@
                     </svg>
                 </button>
             </div>
-            
+
             <div class="upload-section">
                 <button id="upload-btn" class="primary-btn full-width">
                     + Upload PDF
                 </button>
                 <input type="file" id="file-input" hidden multiple accept=".pdf">
+
+                <div style="margin-top: 10px;"></div>
+                <button id="reset-btn" class="primary-btn full-width" style="background-color: #ef4444; color: white;">
+                    🗑️ Reset DB
+                </button>
             </div>
 
             <div class="divider"></div>
@@ -56,4 +64,5 @@
 
     <script src="index.js"></script>
 </body>
+
 </html>
