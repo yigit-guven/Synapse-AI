@@ -124,9 +124,9 @@ if prompt := st.chat_input("Ask a question about your documents..."):
                 )
                 
                 # Run the chain
-                response = qa_chain.invoke({"query": prompt})
-                result = response["result"]
-                source_documents = response["source_documents"]
+                response = qa_chain.invoke({"input": prompt})
+                result = response["answer"]
+                source_documents = response["context"]
                 
                 # Format Response
                 full_response = result
