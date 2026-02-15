@@ -24,7 +24,7 @@ $$\text{Similarity}(A, B) = \frac{A \cdot B}{\|A\| \|B\|}$$
 ## Key Features
 
 *   **Self-Sovereign Data**: Complete root-access control on Linux-based VPS environments.
-*   **Dynamic Knowledge Injection**: Real-time PDF uploading and index refreshing via a Streamlit dashboard.
+*   **Dynamic Knowledge Injection**: Real-time PDF uploading and index refreshing via a Web Interface.
 *   **Agentic Decision Support**: Engineered for complex reasoning tasks, from gaming lore consistency to regulatory compliance.
 *   **GPU/CPU Optimized**: Lightweight containerized deployment via Docker.
 
@@ -41,7 +41,7 @@ Designed with the German startup ecosystem in mind, Synapse AI facilitates Intel
 *   **Language**: Python 3.10+
 *   **Vector Database**: ChromaDB
 *   **Inference Engine**: Ollama (Llama 3 / Mistral)
-*   **Frontend**: Streamlit
+*   **Frontend**: HTML5, CSS3, Vanilla JavaScript
 *   **Containerization**: Docker & Docker Compose
 
 ## Installation & Usage
@@ -57,6 +57,9 @@ Designed with the German startup ecosystem in mind, Synapse AI facilitates Intel
 2.  **Set up Virtual Environment**
     ```bash
     python -m venv venv
+    # On Windows
+    venv\Scripts\activate
+    # On macOS/Linux
     source venv/bin/activate
     ```
 
@@ -64,6 +67,12 @@ Designed with the German startup ecosystem in mind, Synapse AI facilitates Intel
     ```bash
     pip install -r requirements.txt
     ```
+
+4.  **Run the Application**
+    ```bash
+    uvicorn src.api:app --host 0.0.0.0 --port 8000
+    ```
+    Access the UI at `http://localhost:8000`.
 
 ## Contributing
 

@@ -87,14 +87,9 @@ CHROMA_DB_PATH=/app/data/chroma
 Open your browser and navigate to:
 `http://<your-vps-ip>:8501`
 
-## 4. Web Ingestion
 
-Once running, you can ingest documentation from websites directly:
-1.  Paste a URL (e.g., `https://yigit-guven.github.io/some-project/`) into the **Web Ingestion** field in the sidebar.
-2.  Click **Ingest URL**.
-3.  Query the content immediately.
 
-## 5. Security
+## 4. Security
 
 *   **Firewall**: Use `ufw` to restrict ports. Only open 8501 if you need public access, or use SSH tunneling for private access.
     ```bash
