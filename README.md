@@ -56,7 +56,21 @@ Designed with the German startup ecosystem in mind, Synapse AI facilitates Intel
 
 ## Installation & Usage
 
-*(Coming Soon: Detailed Docker setup instructions)*
+### 🐳 Docker Quick Start (Recommended)
+
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/yigit-guven/Synapse-AI.git
+    cd Synapse-AI
+    ```
+
+2.  **Run with Docker Compose**
+    ```bash
+    docker compose up -d --build
+    ```
+    Access the UI at `http://localhost:8501`.
+
+### 🛠️ Manual Installation
 
 1.  **Clone the repository**
     ```bash
