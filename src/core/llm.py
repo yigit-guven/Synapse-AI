@@ -1,7 +1,6 @@
 from langchain_community.llms import Ollama
 from langchain.chains import RetrievalQA
-from langchain.callbacks.manager import CallbackManager
-from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
+from langchain_core.callbacks import CallbackManager, StreamingStdOutCallbackHandler
 from src.core.config import settings
 
 def get_llm(model_name: str = settings.MODEL_NAME):

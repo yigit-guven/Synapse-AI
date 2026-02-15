@@ -1,7 +1,7 @@
 from typing import List
 from langchain_community.vectorstores import Chroma
 from langchain_community.embeddings import SentenceTransformerEmbeddings
-from langchain.schema import Document
+from langchain_core.documents import Document
 from src.core.config import settings
 import chromadb
 
