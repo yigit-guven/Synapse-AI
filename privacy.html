@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Synapse AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .policy-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            color: var(--text-main);
+            background-color: var(--bg-app);
+            min-height: 100vh;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--text-main);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: var(--text-main);
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: var(--text-main);
+        }
+
+        ul {
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .warning-box {
+            background-color: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid #ef4444;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+
+        .warning-box strong {
+            color: #ef4444;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="policy-container">
+        <a href="/" class="back-link">← Back to App</a>
+
+        <h1>Privacy Policy for Public Demo</h1>
+        <p><strong>Effective Date:</strong> 2026-02-15</p>
+
+        <h2>1. Scope</h2>
+        <p>This Privacy Policy applies exclusively to the public demonstration instance of Synapse AI hosted at <code>http://144.34.87.24:8501/</code>. It does not apply to self-hosted instances of the software deployed by users on their own infrastructure.</p>
+
+        <h2>2. Public Shared Environment</h2>
+        <p><strong>The public demo is a shared environment.</strong></p>
+        <ul>
+            <li><strong>Shared Database:</strong> All users interact with a single, shared Vector Database instance.</li>
+            <li><strong>Data Visibility:</strong> Documents uploaded to the demo may be accessible or queryable by other users utilizing the demo simultaneously.</li>
+            <li><strong>No Isolation:</strong> There is no user authentication or data isolation between sessions.</li>
+        </ul>
+
+        <div class="warning-box">
+            <strong>⚠️ WARNING: DO NOT UPLOAD SENSITIVE DATA</strong>
+            Never upload Personally Identifiable Information (PII), financial data, proprietary business secrets, or any other confidential information to the public demo.
+        </div>
+
+        <h2>3. Data Retention</h2>
+        <ul>
+            <li><strong>Temporary Storage:</strong> Uploaded files are processed and stored temporarily for the purpose of the demonstration.</li>
+            <li><strong>No Guarantee of Persistence:</strong> The database may be reset at any time by any user triggering the "Reset DB" function, or by system maintenance.</li>
+            <li><strong>No Backup:</strong> No backups are performed on the demo environment.</li>
+        </ul>
+
+        <h2>4. Liability</h2>
+        <p>The public demo is provided "as-is" without warranty of any kind, express or implied. The developers and maintainers of Synapse AI assume no liability for:</p>
+        <ul>
+            <li>Loss of data.</li>
+            <li>Exposure of sensitive data uploaded by users contrary to this policy.</li>
+            <li>Service interruptions or availability.</li>
+        </ul>
+
+        <h2>5. Contact</h2>
+        <p>For questions or to request the removal of inadvertently uploaded data, please contact the maintainer via the GitHub repository or at <strong>contact@yigitguven.net</strong>.</p>
+    </div>
+</body>
+
+</html>
