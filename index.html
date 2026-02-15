@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Synapse AI</title>
-    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -17,11 +16,12 @@
         <aside class="sidebar">
             <div class="sidebar-header">
                 <div class="logo">
-                    <img src="assets/logo.svg" alt="Synapse AI Logo" class="logo-img">
-                    Synapse AI
+                    <span class="icon">🧬</span> Synapse AI
                 </div>
                 <button id="theme-toggle" class="icon-btn" aria-label="Toggle Dark Mode">
-                    <!-- Icons injected by JS -->
+                    <svg class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
                 </button>
             </div>
 
@@ -43,59 +43,23 @@
             <div class="file-list" id="file-list">
                 <div class="empty-state">No files loaded.</div>
             </div>
-
-            <div class="sidebar-footer">
-                <div class="footer-links">
-                    <a href="https://github.com/yigit-guven/Synapse-AI" target="_blank">GitHub</a>
-                    <span class="separator">•</span>
-                    <a href="#" id="legal-link">Legal</a>
-                </div>
-                <div class="credits">
-                    Developed by Yiğit Güven & Joni Dani
-                </div>
-                <div class="disclaimer">
-                    Synapse AI processes data locally. Chat history is stored in your browser.
-                </div>
-            </div>
         </aside>
 
         <main class="chat-area">
             <div class="chat-feed" id="chat-feed">
                 <div class="start-screen">
-                    <img src="assets/logo.svg" alt="Logo" style="width: 80px; margin-bottom: 20px;">
-                    <h1>Synapse AI</h1>
-                    <p>Secure, local document intelligence.</p>
+                    <h1>Ready to analyze.</h1>
+                    <p>Upload a document to begin. Data is processed locally.</p>
                 </div>
-            </div>
-
-            <div class="typing-indicator" id="typing-indicator" style="display: none;">
-                <span></span><span></span><span></span>
             </div>
 
             <div class="input-container">
-                <div class="input-actions" id="input-actions" style="display: none;">
-                    <button id="stop-btn" class="stop-btn">
-                        ⏹ Stop Generating
-                    </button>
-                </div>
                 <div class="input-box">
-                    <input type="text" id="user-input" placeholder="Ask a question about your documents..."
-                        autocomplete="off">
+                    <input type="text" id="user-input" placeholder="Ask a question..." autocomplete="off">
                     <button id="send-btn" class="send-icon">➜</button>
                 </div>
             </div>
         </main>
-    </div>
-
-    <div id="legal-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2>Legal Information</h2>
-            <p>This application is provided "as is", without warranty of any kind.</p>
-            <p><strong>Data Privacy:</strong> Documents uploaded are processed locally. Chat history is stored in your
-                browser's local storage.</p>
-            <p><strong>License:</strong> GNU General Public License v3 (GPLv3).</p>
-        </div>
     </div>
 
     <script src="index.js"></script>
