@@ -107,9 +107,17 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to submit pull 
 For security concerns, please refer to [SECURITY.md](SECURITY.md).
 
 ---
-
-*"Synapse AI isn't just a reader; it's the connection between your data and your decisions."*
+<p align="center">
+"Synapse AI isn't just a reader; it's the connection between your data and your decisions."
+</p>
+<p align="center">
+<a href="https://github.com/yigit-guven/Synapse-AI/graphs/contributors">
+<img src="https://contrib.rocks/image?repo=yigit-guven/Synapse-AI&max=1000" />
+</a>
+</p>
 
 <div align="center">
-  <p>Developed with ❤️ by <a href="https://github.com/yigit-guven">Yigit Guven</a> & <a href="https://github.com/JoniDani1">Joni Dani</a></p>
+<p><b>Synapse AI</b> is developed with ❤️ by the community.</p>
+<img src="https://img.shields.io/github/license/yigit-guven/Synapse-AI?style=flat-square" alt="License">
+<img src="https://img.shields.io/github/stars/yigit-guven/Synapse-AI?style=flat-square" alt="Stars">
 </div>
