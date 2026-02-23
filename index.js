@@ -111,13 +111,36 @@ async function handleSend() {
         removeLoading(loadingId);
 
         if (!response.ok) {
-            const err = await response.json();
-            throw new Error(err.detail || 'Failed to get response');
+            throw new Error('Failed to get response');
         }
 
-        const data = await response.json();
-        const markdown = marked.parse(data.answer);
-        addMessage(markdown, 'bot', true);
+        // Streaming logic
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let fullAnswer = "";
+
+        // Create bot message placeholder
+        const row = document.createElement('div');
+        row.classList.add('message-row', 'bot');
+        const bubble = document.createElement('div');
+        bubble.classList.add('bubble');
+        bubble.innerHTML = `<strong>Synapse AI:</strong><br><span class="content"></span>`;
+        row.appendChild(bubble);
+        chatFeed.appendChild(row);
+        const contentSpan = bubble.querySelector('.content');
+
+        while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+
+            const chunk = decoder.decode(value, { stream: true });
+            fullAnswer += chunk;
+            contentSpan.textContent = fullAnswer; // Update plain text during stream
+            chatFeed.scrollTop = chatFeed.scrollHeight;
+        }
+
+        // Final Render with Markdown
+        contentSpan.innerHTML = marked.parse(fullAnswer);
 
     } catch (error) {
         removeLoading(loadingId);
