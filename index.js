@@ -88,7 +88,7 @@ if (resetBtn) {
 }
 
 // --- CHAT HANDLER ---
-async function handleSend() {
+function handleSend() {
     const text = userInput.value.trim();
     if (!text) return;
 
@@ -98,31 +98,18 @@ async function handleSend() {
     addMessage(text, 'user');
     userInput.value = '';
 
-    // 2. Loading State
+    // 2. Loading State (Make sure you added the Skeleton Loader CSS from the previous step!)
     const loadingId = showLoading();
 
-    try {
-        const response = await fetch('/api/chat', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: text })
-        });
-
+    // 3. Mock Response with a Citation Badge
+    setTimeout(() => {
         removeLoading(loadingId);
-
-        if (!response.ok) {
-            const err = await response.json();
-            throw new Error(err.detail || 'Failed to get response');
-        }
-
-        const data = await response.json();
-        const markdown = marked.parse(data.answer);
-        addMessage(markdown, 'bot', true);
-
-    } catch (error) {
-        removeLoading(loadingId);
-        addMessage(`⚠️ Error: ${error.message}`, 'bot');
-    }
+        
+        // We inject a <span class="citation"> here to create the clickable badge
+        const mockResponse = `I've scanned the document. Based on the architecture diagrams, the 'Ingestion Node' connects directly to the 'Vector Store' via a secure pipeline. <span class="citation" title="View source document">🔗 system_architecture.pdf (pg. 4)</span>`;
+        
+        addMessage(mockResponse, 'bot');
+    }, 1500);
 }
 
 function addMessage(text, sender, isHtml = false) {
@@ -142,12 +129,23 @@ function addMessage(text, sender, isHtml = false) {
     chatFeed.scrollTop = chatFeed.scrollHeight;
 }
 
-function showLoading(text = "Processing...") {
+function showLoading() {
     const id = 'loading-' + Date.now();
     const row = document.createElement('div');
     row.classList.add('message-row', 'bot');
     row.id = id;
-    row.innerHTML = `<div class="bubble" style="color: var(--text-muted)">${text}</div>`;
+    
+    // Replace the boring text with the sleek animated lines
+    row.innerHTML = `
+        <div class="bubble" style="background-color: transparent; padding-left: 0;">
+            <div class="skeleton-container">
+                <div class="skeleton-line"></div>
+                <div class="skeleton-line"></div>
+                <div class="skeleton-line short"></div>
+            </div>
+        </div>
+    `;
+    
     chatFeed.appendChild(row);
     chatFeed.scrollTop = chatFeed.scrollHeight;
     return id;

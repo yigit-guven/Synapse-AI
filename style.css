@@ -106,6 +106,29 @@ body {
     margin-bottom: 12px;
 }
 
+/* SKELETON LOADER ANIMATION */
+.skeleton-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 250px;
+}
+
+.skeleton-line {
+    height: 12px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--border) 25%, var(--bg-panel) 50%, var(--border) 75%);
+    background-size: 200% 100%;
+    animation: pulse 1.5s infinite linear;
+}
+
+.skeleton-line.short { width: 60%; }
+
+@keyframes pulse {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
 .file-list { flex: 1; overflow-y: auto; }
 .empty-state { font-size: 0.85rem; color: var(--text-muted); font-style: italic; }
 
@@ -120,6 +143,54 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
+}
+
+/* --- CITATION BADGES --- */
+.citation {
+    display: inline-block;
+    background-color: var(--border);
+    color: var(--text-main);
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    font-family: 'Inter', sans-serif;
+    vertical-align: middle;
+}
+
+.citation:hover {
+    background-color: var(--accent);
+    color: white;
+}
+
+/* --- FILE METADATA IN SIDEBAR --- */
+.file-info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden;
+}
+
+.file-name {
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.file-meta {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3px;
+}
+
+.status-badge {
+    color: var(--accent);
+    font-weight: 600;
 }
 
 /* --- MAIN CHAT AREA --- */
