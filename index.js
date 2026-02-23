@@ -1,3 +1,4 @@
+console.log("Synapse AI: Streaming Version 1.1 (Feb 23)");
 const chatFeed = document.getElementById('chat-feed');
 const userInput = document.getElementById('user-input');
 const sendBtn = document.getElementById('send-btn');

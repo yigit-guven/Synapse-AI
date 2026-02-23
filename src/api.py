@@ -41,7 +41,16 @@ async def chat_endpoint(request: ChatRequest):
                 if "answer" in chunk:
                     yield chunk["answer"]
         
-        return StreamingResponse(event_generator(), media_type="text/plain")
+        return StreamingResponse(
+            event_generator(), 
+            media_type="text/plain",
+            headers={
+                "Content-Type": "text/plain; charset=utf-8",
+                "Cache-Control": "no-cache",
+                "Connection": "keep-alive",
+                "X-Content-Type-Options": "nosniff"
+            }
+        )
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
