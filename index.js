@@ -111,7 +111,14 @@ async function handleSend() {
         removeLoading(loadingId);
 
         if (!response.ok) {
-            throw new Error('Failed to get response');
+            const contentType = response.headers.get("content-type");
+            if (contentType && contentType.includes("application/json")) {
+                const err = await response.json();
+                throw new Error(err.detail || 'Failed to get response');
+            } else {
+                const text = await response.text();
+                throw new Error(text || 'Failed to get response');
+            }
         }
 
         // Streaming logic
@@ -155,7 +162,7 @@ function addMessage(text, sender, isHtml = false) {
     bubble.classList.add('bubble');
 
     if (sender === 'bot') {
-        bubble.innerHTML = `<strong>Synapse AI:</strong><br>${isHtml ? text : text}`;
+        bubble.innerHTML = `<strong>Synapse AI:</strong><br>${text}`;
     } else {
         bubble.textContent = text;
     }
