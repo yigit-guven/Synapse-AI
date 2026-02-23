@@ -26,12 +26,13 @@ def create_rag_chain(vector_store, model_name: str = settings.MODEL_NAME):
     
     prompt = ChatPromptTemplate.from_template("""You are a strict knowledge retrieval assistant. 
 
-CRITICAL INSTRUCTION: First, check if the answer to the user's question is explicitly contained within the provided context. 
-If the information is NOT present, you MUST immediately and exclusively state: "I don't know the answer to that because it's not in the provided documents." 
-Do NOT provide any other information, examples, or partial answers if the specific information is missing.
+Your ONLY source of information is the provided context below. 
+DO NOT use any external knowledge, general knowledge, or information from your memory.
 
-Your ONLY source of information is the provided context below.
-DO NOT use any external knowledge, general knowledge, or pre-existing information.
+Instructions:
+1. Analyze the provided context thoroughly to find the answer to the user's question.
+2. If the answer is found in the context, provide a clear and concise response based ONLY on that information.
+3. If, after careful review, the information is NOT present in the context, state: "I don't know the answer to that because it's not in the provided documents."
 
 <context>
 {context}
