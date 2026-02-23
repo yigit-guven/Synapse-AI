@@ -3,7 +3,7 @@ import shutil
 import tempfile
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, StreamingResponse
 from pydantic import BaseModel
 from typing import List
 
@@ -36,13 +36,21 @@ async def chat_endpoint(request: ChatRequest):
     try:
         qa_chain = create_rag_chain(vector_store, model_name=request.model_name)
         
-        # Invoke chain
-        response = qa_chain.invoke({"input": request.message})
+        async def event_generator():
+            async for chunk in qa_chain.astream({"input": request.message}):
+                if "answer" in chunk:
+                    yield chunk["answer"]
         
-        return {
-            "answer": response["answer"],
-            "context": [doc.page_content for doc in response["context"]]
-        }
+        return StreamingResponse(
+            event_generator(), 
+            media_type="text/plain",
+            headers={
+                "Content-Type": "text/plain; charset=utf-8",
+                "Cache-Control": "no-cache",
+                "Connection": "keep-alive",
+                "X-Content-Type-Options": "nosniff"
+            }
+        )
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

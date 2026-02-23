@@ -1,3 +1,4 @@
+console.log("Synapse AI: Streaming Version 1.1 (Feb 23)");
 const chatFeed = document.getElementById('chat-feed');
 const userInput = document.getElementById('user-input');
 const sendBtn = document.getElementById('send-btn');
@@ -104,12 +105,59 @@ function handleSend() {
     // 3. Mock Response with a Citation Badge
     setTimeout(() => {
         removeLoading(loadingId);
+<<<<<<< HEAD
         
         // We inject a <span class="citation"> here to create the clickable badge
         const mockResponse = `I've scanned the document. Based on the architecture diagrams, the 'Ingestion Node' connects directly to the 'Vector Store' via a secure pipeline. <span class="citation" title="View source document">🔗 system_architecture.pdf (pg. 4)</span>`;
         
         addMessage(mockResponse, 'bot');
     }, 1500);
+=======
+
+        if (!response.ok) {
+            const contentType = response.headers.get("content-type");
+            if (contentType && contentType.includes("application/json")) {
+                const err = await response.json();
+                throw new Error(err.detail || 'Failed to get response');
+            } else {
+                const text = await response.text();
+                throw new Error(text || 'Failed to get response');
+            }
+        }
+
+        // Streaming logic
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let fullAnswer = "";
+
+        // Create bot message placeholder
+        const row = document.createElement('div');
+        row.classList.add('message-row', 'bot');
+        const bubble = document.createElement('div');
+        bubble.classList.add('bubble');
+        bubble.innerHTML = `<strong>Synapse AI:</strong><br><span class="content"></span>`;
+        row.appendChild(bubble);
+        chatFeed.appendChild(row);
+        const contentSpan = bubble.querySelector('.content');
+
+        while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+
+            const chunk = decoder.decode(value, { stream: true });
+            fullAnswer += chunk;
+            contentSpan.textContent = fullAnswer; // Update plain text during stream
+            chatFeed.scrollTop = chatFeed.scrollHeight;
+        }
+
+        // Final Render with Markdown
+        contentSpan.innerHTML = marked.parse(fullAnswer);
+
+    } catch (error) {
+        removeLoading(loadingId);
+        addMessage(`⚠️ Error: ${error.message}`, 'bot');
+    }
+>>>>>>> 51a3b4df6a66f3d3ab85e3505f87ebaed3a3852f
 }
 
 function addMessage(text, sender, isHtml = false) {
@@ -119,7 +167,7 @@ function addMessage(text, sender, isHtml = false) {
     bubble.classList.add('bubble');
 
     if (sender === 'bot') {
-        bubble.innerHTML = `<strong>Synapse AI:</strong><br>${isHtml ? text : text}`;
+        bubble.innerHTML = `<strong>Synapse AI:</strong><br>${text}`;
     } else {
         bubble.textContent = text;
     }
