@@ -9,6 +9,9 @@ const resetBtn = document.getElementById('reset-btn'); // New Reset Button
 const startScreen = document.querySelector('.start-screen');
 const themeToggle = document.getElementById('theme-toggle');
 
+const MAX_FILE_SIZE_MB = 10;
+const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
+
 // --- THEME TOGGLE LOGIC ---
 const sunIcon = `<svg class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
 const moonIcon = `<svg class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
@@ -26,8 +29,13 @@ fileInput.addEventListener('change', async (e) => {
     const files = Array.from(e.target.files);
     if (files.length === 0) return;
 
-    const formData = new FormData();
-    files.forEach(file => formData.append('files', file));
+    for (let file of files) {
+        if (file.size > MAX_FILE_SIZE_BYTES) {
+            alert(`Upload blocked: "${file.name}" is too large.\n\nMaximum file size is ${MAX_FILE_SIZE_MB}MB to ensure stable local LLM performance.`);
+            fileInput.value = ''; 
+            return; 
+        }
+    }
 
     // Optimistic UI update
     const emptyState = document.querySelector('.empty-state');
@@ -43,9 +51,15 @@ fileInput.addEventListener('change', async (e) => {
     try {
         const loadingId = showLoading("Ingesting documents...");
 
+        // FIX: Create the FormData object and attach the files
+        const formData = new FormData();
+        files.forEach(file => {
+            formData.append('file', file); // 'file' is the key your Python backend will look for
+        });
+
         const response = await fetch('/api/ingest', {
             method: 'POST',
-            body: formData
+            body: formData // Now this works!
         });
 
         removeLoading(loadingId);
@@ -105,59 +119,12 @@ function handleSend() {
     // 3. Mock Response with a Citation Badge
     setTimeout(() => {
         removeLoading(loadingId);
-<<<<<<< HEAD
         
         // We inject a <span class="citation"> here to create the clickable badge
         const mockResponse = `I've scanned the document. Based on the architecture diagrams, the 'Ingestion Node' connects directly to the 'Vector Store' via a secure pipeline. <span class="citation" title="View source document">🔗 system_architecture.pdf (pg. 4)</span>`;
         
         addMessage(mockResponse, 'bot');
     }, 1500);
-=======
-
-        if (!response.ok) {
-            const contentType = response.headers.get("content-type");
-            if (contentType && contentType.includes("application/json")) {
-                const err = await response.json();
-                throw new Error(err.detail || 'Failed to get response');
-            } else {
-                const text = await response.text();
-                throw new Error(text || 'Failed to get response');
-            }
-        }
-
-        // Streaming logic
-        const reader = response.body.getReader();
-        const decoder = new TextDecoder();
-        let fullAnswer = "";
-
-        // Create bot message placeholder
-        const row = document.createElement('div');
-        row.classList.add('message-row', 'bot');
-        const bubble = document.createElement('div');
-        bubble.classList.add('bubble');
-        bubble.innerHTML = `<strong>Synapse AI:</strong><br><span class="content"></span>`;
-        row.appendChild(bubble);
-        chatFeed.appendChild(row);
-        const contentSpan = bubble.querySelector('.content');
-
-        while (true) {
-            const { done, value } = await reader.read();
-            if (done) break;
-
-            const chunk = decoder.decode(value, { stream: true });
-            fullAnswer += chunk;
-            contentSpan.textContent = fullAnswer; // Update plain text during stream
-            chatFeed.scrollTop = chatFeed.scrollHeight;
-        }
-
-        // Final Render with Markdown
-        contentSpan.innerHTML = marked.parse(fullAnswer);
-
-    } catch (error) {
-        removeLoading(loadingId);
-        addMessage(`⚠️ Error: ${error.message}`, 'bot');
-    }
->>>>>>> 51a3b4df6a66f3d3ab85e3505f87ebaed3a3852f
 }
 
 function addMessage(text, sender, isHtml = false) {
