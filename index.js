@@ -32,8 +32,8 @@ fileInput.addEventListener('change', async (e) => {
     for (let file of files) {
         if (file.size > MAX_FILE_SIZE_BYTES) {
             showToast(`Blocked: "${file.name}" exceeds ${MAX_FILE_SIZE_MB}MB.`, 'error');
-            fileInput.value = ''; 
-            return; 
+            fileInput.value = '';
+            return;
         }
     }
 
@@ -67,8 +67,12 @@ fileInput.addEventListener('change', async (e) => {
         removeLoading(loadingId);
 
         if (!response.ok) throw new Error('Ingestion failed');
-
         const result = await response.json();
+
+        // --- ENABLE UI AFTER SUCCESSFUL UPLOAD ---
+        userInput.disabled = false;
+        sendBtn.disabled = false;
+        userInput.placeholder = "Ask about your documents...";
 
         // Update UI to show success
         const fileItems = fileList.querySelectorAll('.file-item span');
@@ -79,7 +83,7 @@ fileInput.addEventListener('change', async (e) => {
         disableChatInput();
 
     } catch (error) {
-        console.error(error);
+        console.error("Ingestion Error:", error);
         addMessage(`❌ Error: ${error.message}`, 'bot');
     }
 });
@@ -99,6 +103,12 @@ if (resetBtn) {
                 chatFeed.appendChild(startScreen);
                 startScreen.style.display = 'block';
             }
+
+            // Re-disable input after reset
+            userInput.disabled = true;
+            sendBtn.disabled = true;
+            userInput.placeholder = "Upload a document to unlock chat...";
+
             showToast('Database cleared!');
         } catch (error) {
             showToast(`Error: ${error.message}`);
@@ -107,9 +117,9 @@ if (resetBtn) {
 }
 
 // --- CHAT HANDLER ---
-function handleSend() {
+async function handleSend() {
     const text = userInput.value.trim();
-    if (!text) return;
+    if (!text || userInput.disabled) return;
 
     if (startScreen) startScreen.style.display = 'none';
 
@@ -117,18 +127,50 @@ function handleSend() {
     addMessage(text, 'user');
     userInput.value = '';
 
-    // 2. Loading State (Make sure you added the Skeleton Loader CSS from the previous step!)
+    // 2. Loading State
     const loadingId = showLoading();
 
-    // 3. Mock Response with a Citation Badge
-    setTimeout(() => {
+    try {
+        const response = await fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: text })
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.detail || 'Chat failed');
+        }
+
         removeLoading(loadingId);
-        
-        // We inject a <span class="citation"> here to create the clickable badge
-        const mockResponse = `I've scanned the document. Based on the architecture diagrams, the 'Ingestion Node' connects directly to the 'Vector Store' via a secure pipeline. <span class="citation" title="View source document">🔗 system_architecture.pdf (pg. 4)</span>`;
-        
-        addMessage(mockResponse, 'bot');
-    }, 1500);
+
+        // 3. Handle Streaming Response
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+
+        let botMessageId = 'bot-' + Date.now();
+        addMessage("", 'bot', botMessageId); // Add empty bubble
+        const bubble = document.getElementById(botMessageId).querySelector('.bubble');
+
+        let fullText = "";
+
+        while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+
+            const chunk = decoder.decode(value, { stream: true });
+            fullText += chunk;
+
+            // Update bubble with parsed markdown
+            bubble.innerHTML = `<strong>Synapse AI:</strong><br>${marked.parse(fullText)}`;
+            chatFeed.scrollTop = chatFeed.scrollHeight;
+        }
+
+    } catch (error) {
+        console.error("Chat Error:", error);
+        removeLoading(loadingId);
+        addMessage(`❌ Error: ${error.message}`, 'bot');
+    }
 }
 
 // --- TOAST NOTIFICATION SYSTEM ---
@@ -138,7 +180,7 @@ function showToast(message, type = 'info') {
 
     const toast = document.createElement('div');
     toast.classList.add('toast', type);
-    
+
     // Choose an icon based on the type
     let icon = 'ℹ️';
     if (type === 'error') icon = '❌';
@@ -146,7 +188,7 @@ function showToast(message, type = 'info') {
     if (type === 'warning') icon = '⚠️';
 
     toast.innerHTML = `<span>${icon}</span> <div>${message}</div>`;
-    
+
     container.appendChild(toast);
 
     // Auto-remove after 4 seconds
@@ -157,20 +199,18 @@ function showToast(message, type = 'info') {
     }, 4000);
 }
 
-function addMessage(text, sender) {
+function addMessage(text, sender, id = null) {
     const row = document.createElement('div');
     row.classList.add('message-row', sender);
+    if (id) row.id = id;
+
     const bubble = document.createElement('div');
     bubble.classList.add('bubble');
 
     if (sender === 'bot') {
-        // 1. Parse the raw text into HTML using marked.js
-        const htmlContent = marked.parse(text);
-        
-        // 2. Inject the parsed HTML safely
+        const htmlContent = text ? marked.parse(text) : "...";
         bubble.innerHTML = `<strong>Synapse AI:</strong><br>${htmlContent}`;
     } else {
-        // User messages stay as plain text for security (prevents HTML injection)
         bubble.textContent = text;
     }
 
@@ -184,7 +224,7 @@ function showLoading() {
     const row = document.createElement('div');
     row.classList.add('message-row', 'bot');
     row.id = id;
-    
+
     // Replace the boring text with the sleek animated lines
     row.innerHTML = `
         <div class="bubble" style="background-color: transparent; padding-left: 0;">
@@ -195,7 +235,7 @@ function showLoading() {
             </div>
         </div>
     `;
-    
+
     chatFeed.appendChild(row);
     chatFeed.scrollTop = chatFeed.scrollHeight;
     return id;

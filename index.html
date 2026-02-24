@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:title" content="Synapse AI - Document Intelligence Engine">
+    <meta property="og:description" content="High-performance, self-hosted RAG infrastructure for your documents.">
+    <meta property="og:image" content="/socialbanner.png">
+    <meta property="og:type" content="website">
 </head>
 
 <body>
@@ -16,7 +22,7 @@
         <aside class="sidebar">
             <div class="sidebar-header">
                 <div class="logo">
-                    <span class="icon">🧬</span> SYNAPSE AI
+                    <img src="/logo.svg" alt="Synapse AI Logo" style="height: 24px; width: auto;">
                 </div>
                 <button id="theme-toggle" class="icon-btn" aria-label="Toggle Dark Mode">
                     <svg class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -67,7 +73,8 @@
 
             <div class="input-container">
                 <div class="input-box">
-                    <input type="text" id="user-input" placeholder="Upload a document to unlock chat..." autocomplete="off" disabled>
+                    <input type="text" id="user-input" placeholder="Upload a document to unlock chat..."
+                        autocomplete="off" disabled>
                     <button id="send-btn" class="send-icon" disabled>➜</button>
                 </div>
             </div>

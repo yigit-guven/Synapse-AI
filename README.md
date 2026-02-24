@@ -1,5 +1,7 @@
 # Synapse AI
 
+![Synapse AI Social Banner](/socialbanner.png)
+
 **High-Performance, Self-Hosted Document Intelligence Engine**
 
 Synapse AI is an enterprise-grade RAG (Retrieval-Augmented Generation) infrastructure designed to bridge the gap between static unstructured data and actionable machine intelligence. By leveraging local Large Language Models (LLMs) and vector-based semantic search, Synapse AI transforms private document repositories into interactive, queryable knowledge bases.
@@ -97,6 +99,12 @@ Designed with the German startup ecosystem in mind, Synapse AI facilitates Intel
     uvicorn src.api:app --host 0.0.0.0 --port 8000
     ```
     Access the UI at `http://localhost:8000`.
+
+## Automated Deployment (CI/CD)
+
+For production environments on an Ubuntu VPS, you can set up an automated deployment system that tracks pushes to this repository and automatically updates your instance.
+
+See [AUTO_DEPLOY.md](AUTO_DEPLOY.md) for the complete setup guide.
 
 ## Contributing
 
