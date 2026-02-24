@@ -31,7 +31,7 @@ fileInput.addEventListener('change', async (e) => {
 
     for (let file of files) {
         if (file.size > MAX_FILE_SIZE_BYTES) {
-            alert(`Upload blocked: "${file.name}" is too large.\n\nMaximum file size is ${MAX_FILE_SIZE_MB}MB to ensure stable local LLM performance.`);
+            showToast(`Blocked: "${file.name}" exceeds ${MAX_FILE_SIZE_MB}MB.`, 'error');
             fileInput.value = ''; 
             return; 
         }
@@ -95,9 +95,9 @@ if (resetBtn) {
                 chatFeed.appendChild(startScreen);
                 startScreen.style.display = 'block';
             }
-            alert('Database cleared!');
+            showToast('Database cleared!');
         } catch (error) {
-            alert(`Error: ${error.message}`);
+            showToast(`Error: ${error.message}`);
         }
     });
 }
@@ -125,6 +125,32 @@ function handleSend() {
         
         addMessage(mockResponse, 'bot');
     }, 1500);
+}
+
+// --- TOAST NOTIFICATION SYSTEM ---
+function showToast(message, type = 'info') {
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+
+    const toast = document.createElement('div');
+    toast.classList.add('toast', type);
+    
+    // Choose an icon based on the type
+    let icon = 'ℹ️';
+    if (type === 'error') icon = '❌';
+    if (type === 'success') icon = '✅';
+    if (type === 'warning') icon = '⚠️';
+
+    toast.innerHTML = `<span>${icon}</span> <div>${message}</div>`;
+    
+    container.appendChild(toast);
+
+    // Auto-remove after 4 seconds
+    setTimeout(() => {
+        toast.classList.add('hide');
+        // Wait for the slide-out animation to finish before deleting the element
+        toast.addEventListener('transitionend', () => toast.remove());
+    }, 4000);
 }
 
 function addMessage(text, sender, isHtml = false) {
