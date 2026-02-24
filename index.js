@@ -48,7 +48,7 @@ fileInput.addEventListener('change', async (e) => {
         fileList.appendChild(item);
     });
 
-    enableChatInput();
+    disableChatInput();
 
     try {
         const loadingId = showLoading("Ingesting documents...");
@@ -80,7 +80,7 @@ fileInput.addEventListener('change', async (e) => {
 
         addMessage(`✅ Successfully ingested ${result.message}`, 'bot');
 
-        disableChatInput();
+        enableChatInput();
 
     } catch (error) {
         console.error("Ingestion Error:", error);
