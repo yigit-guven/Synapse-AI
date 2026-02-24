@@ -56,7 +56,7 @@ fileInput.addEventListener('change', async (e) => {
         // FIX: Create the FormData object and attach the files
         const formData = new FormData();
         files.forEach(file => {
-            formData.append('file', file); // 'file' is the key your Python backend will look for
+            formData.append('files', file); // 'files' is the key your Python backend will look for
         });
 
         const response = await fetch('/api/ingest', {
