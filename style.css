@@ -335,3 +335,51 @@ body {
     from { transform: translateX(120%); opacity: 0; }
     to { transform: translateX(0); opacity: 1; }
 }
+
+/* --- MARKDOWN AI OUTPUT STYLES --- */
+.bubble p {
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+.bubble p:last-child {
+    margin-bottom: 0;
+}
+
+.bubble ul, .bubble ol {
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+/* Inline code formatting */
+.bubble code {
+    background-color: rgba(0, 0, 0, 0.08);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.9em;
+}
+
+body.dark-mode .bubble code {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Code block formatting */
+.bubble pre {
+    background-color: #1e1e24; /* Deep dark background for code blocks */
+    color: #e4e4e7;
+    padding: 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 12px 0;
+    font-family: monospace;
+    font-size: 0.9em;
+    border: 1px solid #333;
+}
+
+/* Override inline code style if it's inside a code block */
+.bubble pre code {
+    background-color: transparent;
+    padding: 0;
+    color: inherit;
+}

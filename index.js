@@ -153,15 +153,20 @@ function showToast(message, type = 'info') {
     }, 4000);
 }
 
-function addMessage(text, sender, isHtml = false) {
+function addMessage(text, sender) {
     const row = document.createElement('div');
     row.classList.add('message-row', sender);
     const bubble = document.createElement('div');
     bubble.classList.add('bubble');
 
     if (sender === 'bot') {
-        bubble.innerHTML = `<strong>Synapse AI:</strong><br>${text}`;
+        // 1. Parse the raw text into HTML using marked.js
+        const htmlContent = marked.parse(text);
+        
+        // 2. Inject the parsed HTML safely
+        bubble.innerHTML = `<strong>Synapse AI:</strong><br>${htmlContent}`;
     } else {
+        // User messages stay as plain text for security (prevents HTML injection)
         bubble.textContent = text;
     }
 
