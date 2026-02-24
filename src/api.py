@@ -130,6 +130,10 @@ async def serve_css():
 async def serve_js():
     return FileResponse("index.js")
 
+@app.get("/privacy.html")
+async def serve_privacy():
+    return FileResponse("privacy.html")
+
 @app.get("/logo.svg")
 async def serve_logo():
     return FileResponse("logo.svg")
