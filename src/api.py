@@ -129,3 +129,11 @@ async def serve_css():
 @app.get("/index.js")
 async def serve_js():
     return FileResponse("index.js")
+
+@app.get("/logo.svg")
+async def serve_logo():
+    return FileResponse("logo.svg")
+
+@app.get("/socialbanner.png")
+async def serve_banner():
+    return FileResponse("socialbanner.png")

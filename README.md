@@ -1,5 +1,7 @@
 # Synapse AI
 
+![Synapse AI Social Banner](/socialbanner.png)
+
 **High-Performance, Self-Hosted Document Intelligence Engine**
 
 Synapse AI is an enterprise-grade RAG (Retrieval-Augmented Generation) infrastructure designed to bridge the gap between static unstructured data and actionable machine intelligence. By leveraging local Large Language Models (LLMs) and vector-based semantic search, Synapse AI transforms private document repositories into interactive, queryable knowledge bases.
