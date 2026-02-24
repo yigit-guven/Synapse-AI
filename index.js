@@ -174,6 +174,7 @@ async function handleSend() {
 }
 
 // --- TOAST NOTIFICATION SYSTEM ---
+// --- TOAST NOTIFICATION SYSTEM ---
 function showToast(message, type = 'info') {
     const container = document.getElementById('toast-container');
     if (!container) return;
@@ -191,12 +192,15 @@ function showToast(message, type = 'info') {
 
     container.appendChild(toast);
 
-    // Auto-remove after 4 seconds
+    // Auto-remove after 3 seconds (3000 milliseconds)
     setTimeout(() => {
-        toast.classList.add('hide');
-        // Wait for the slide-out animation to finish before deleting the element
-        toast.addEventListener('transitionend', () => toast.remove());
-    }, 4000);
+        toast.classList.add('hide'); // Starts the slide-out animation
+        
+        // Bulletproof removal: Wait exactly 300ms (the length of the CSS animation) then delete
+        setTimeout(() => {
+            toast.remove();
+        }, 300); 
+    }, 3000); 
 }
 
 function addMessage(text, sender, id = null) {
