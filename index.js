@@ -8,7 +8,7 @@ const fileList = document.getElementById('file-list');
 const resetBtn = document.getElementById('reset-btn'); // New Reset Button
 const startScreen = document.querySelector('.start-screen');
 const themeToggle = document.getElementById('theme-toggle');
-
+//Joni
 const MAX_FILE_SIZE_MB = 10;
 const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
 
