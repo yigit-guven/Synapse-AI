@@ -48,6 +48,8 @@ fileInput.addEventListener('change', async (e) => {
         fileList.appendChild(item);
     });
 
+    enableChatInput();
+
     try {
         const loadingId = showLoading("Ingesting documents...");
 
@@ -73,6 +75,8 @@ fileInput.addEventListener('change', async (e) => {
         fileItems.forEach(span => span.textContent = '📄');
 
         addMessage(`✅ Successfully ingested ${result.message}`, 'bot');
+
+        disableChatInput();
 
     } catch (error) {
         console.error(error);
@@ -206,3 +210,17 @@ sendBtn.addEventListener('click', handleSend);
 userInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') handleSend();
 });
+
+// --- STATE MANAGEMENT ---
+function enableChatInput() {
+    userInput.disabled = false;
+    sendBtn.disabled = false;
+    userInput.placeholder = "Ask a question about your documents...";
+    userInput.focus(); // Automatically put the cursor in the box for them!
+}
+
+function disableChatInput() {
+    userInput.disabled = true;
+    sendBtn.disabled = true;
+    userInput.placeholder = "Upload a document to unlock chat...";
+}

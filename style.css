@@ -383,3 +383,21 @@ body.dark-mode .bubble code {
     padding: 0;
     color: inherit;
 }
+
+/* --- DISABLED INPUT STATE --- */
+.input-box input:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.send-icon:disabled {
+    background-color: var(--border);
+    color: var(--text-muted);
+    cursor: not-allowed;
+}
+
+/* Ensure the wrapper also shows the not-allowed cursor */
+.input-box:has(input:disabled) {
+    background-color: var(--bg-app);
+    cursor: not-allowed;
+}
