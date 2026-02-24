@@ -21,7 +21,8 @@
 
 /* --- DARK MODE (Overrides) --- */
 body.dark-mode,
-.dark-mode body {
+.dark-mode body,
+.dark-mode {
     --bg-app: #18181b;
     /* Very Dark Grey Background */
     --bg-panel: #27272a;
@@ -41,10 +42,19 @@ body.dark-mode,
     --shadow: rgba(0, 0, 0, 0.5);
 }
 
-/* Invert Logo Color in Dark Mode */
-body.dark-mode .logo img {
+/* Logo Inversion Logic:
+   Original logo.svg is white. 
+   - Light Mode: Invert (make dark)
+   - Dark Mode: No Invert (stay white)
+*/
+.logo img {
     filter: invert(1);
     transition: filter 0.3s ease;
+}
+
+body.dark-mode .logo img,
+.dark-mode .logo img {
+    filter: invert(0);
 }
 
 * {

@@ -21,10 +21,7 @@
             const savedTheme = localStorage.getItem('theme');
             const prefersDark = savedTheme ? savedTheme === 'dark' : true; // Default to dark
             if (prefersDark) {
-                // Apply to body via DOMContentLoaded or a quick inline check
-                document.addEventListener('DOMContentLoaded', function () {
-                    document.body.classList.add('dark-mode');
-                });
+                document.documentElement.classList.add('dark-mode');
             }
         })();
     </script>
