@@ -13,6 +13,19 @@
     <meta property="og:description" content="View the privacy policy for the Synapse AI public demo.">
     <meta property="og:image" content="/socialbanner.png">
     <meta property="og:type" content="website">
+    <link rel="icon" href="/logo.svg" type="image/svg+xml">
+
+    <script>
+        // Apply theme immediately to prevent light-mode flash
+        (function () {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = savedTheme ? savedTheme === 'dark' : true; // Default to dark
+            if (prefersDark) {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
+
     <style>
         .policy-container {
             max-width: 800px;
@@ -93,7 +106,8 @@
         <h2>1. Scope</h2>
         <p>This Privacy Policy applies exclusively to the public demonstration instance of Synapse AI hosted at
             <code>http://144.34.87.24:8501/</code>. It does not apply to self-hosted instances of the software deployed
-            by users on their own infrastructure.</p>
+            by users on their own infrastructure.
+        </p>
 
         <h2>2. Public Shared Environment</h2>
         <p><strong>The public demo is a shared environment.</strong></p>

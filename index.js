@@ -12,14 +12,30 @@ const themeToggle = document.getElementById('theme-toggle');
 const MAX_FILE_SIZE_MB = 10;
 const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
 
-// --- THEME TOGGLE LOGIC ---
+// --- THEME LOGIC ---
 const sunIcon = `<svg class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
 const moonIcon = `<svg class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
 
+function setTheme(isDark) {
+    if (isDark) {
+        document.body.classList.add('dark-mode');
+        themeToggle.innerHTML = sunIcon;
+        localStorage.setItem('theme', 'dark');
+    } else {
+        document.body.classList.remove('dark-mode');
+        themeToggle.innerHTML = moonIcon;
+        localStorage.setItem('theme', 'light');
+    }
+}
+
+// Initial choice: Get from localStorage, or default to dark
+const savedTheme = localStorage.getItem('theme');
+const prefersDark = savedTheme ? savedTheme === 'dark' : true;
+setTheme(prefersDark);
+
 themeToggle.addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
-    const isDark = document.body.classList.contains('dark-mode');
-    themeToggle.innerHTML = isDark ? sunIcon : moonIcon;
+    const isNowDark = !document.body.classList.contains('dark-mode');
+    setTheme(isNowDark);
 });
 
 // --- UPLOAD HANDLER ---
@@ -56,7 +72,7 @@ fileInput.addEventListener('change', async (e) => {
         // FIX: Create the FormData object and attach the files
         const formData = new FormData();
         files.forEach(file => {
-            formData.append('file', file); // 'file' is the key your Python backend will look for
+            formData.append('files', file); // 'files' is the key your Python backend will look for
         });
 
         const response = await fetch('/api/ingest', {
@@ -195,12 +211,12 @@ function showToast(message, type = 'info') {
     // Auto-remove after 3 seconds (3000 milliseconds)
     setTimeout(() => {
         toast.classList.add('hide'); // Starts the slide-out animation
-        
+
         // Bulletproof removal: Wait exactly 300ms (the length of the CSS animation) then delete
         setTimeout(() => {
             toast.remove();
-        }, 300); 
-    }, 3000); 
+        }, 300);
+    }, 3000);
 }
 
 function addMessage(text, sender, id = null) {
