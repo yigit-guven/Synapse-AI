@@ -98,6 +98,12 @@ Designed with the German startup ecosystem in mind, Synapse AI facilitates Intel
     ```
     Access the UI at `http://localhost:8000`.
 
+## Automated Deployment (CI/CD)
+
+For production environments on an Ubuntu VPS, you can set up an automated deployment system that tracks pushes to this repository and automatically updates your instance.
+
+See [AUTO_DEPLOY.md](AUTO_DEPLOY.md) for the complete setup guide.
+
 ## Contributing
 
 Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to submit pull requests to this project.
