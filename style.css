@@ -1,30 +1,57 @@
 :root {
     /* --- LIGHT MODE (Default Variables) --- */
-    --bg-app: #f3f4f6;       /* Light Grey Background */
-    --bg-panel: #ffffff;     /* White Sidebar/Panels */
-    --text-main: #1f2937;    /* Dark Grey Text */
-    --text-muted: #6b7280;   /* Light Grey Text */
-    --border: #e5e7eb;       /* Light Grey Border */
-    --accent: #2563eb;       /* Blue Accent */
-    --input-bg: #ffffff;     /* White Input Background */
-    --msg-user: #e5e7eb;     /* Light Grey Bubble */
+    --bg-app: #f3f4f6;
+    /* Light Grey Background */
+    --bg-panel: #ffffff;
+    /* White Sidebar/Panels */
+    --text-main: #1f2937;
+    /* Dark Grey Text */
+    --text-muted: #6b7280;
+    /* Light Grey Text */
+    --border: #e5e7eb;
+    /* Light Grey Border */
+    --accent: #2563eb;
+    /* Blue Accent */
+    --input-bg: #ffffff;
+    /* White Input Background */
+    --msg-user: #e5e7eb;
+    /* Light Grey Bubble */
     --shadow: rgba(0, 0, 0, 0.05);
 }
 
 /* --- DARK MODE (Overrides) --- */
-body.dark-mode {
-    --bg-app: #18181b;       /* Very Dark Grey Background */
-    --bg-panel: #27272a;     /* Slightly Lighter Grey Panel */
-    --text-main: #f3f4f6;    /* White Text */
-    --text-muted: #9ca3af;   /* Muted Grey Text */
-    --border: #3f3f46;       /* Dark Grey Border */
-    --accent: #3b82f6;       /* Brighter Blue for Contrast */
-    --input-bg: #27272a;     /* Dark Grey Input Background */
-    --msg-user: #3f3f46;     /* Dark Grey Bubble */
+body.dark-mode,
+.dark-mode body {
+    --bg-app: #18181b;
+    /* Very Dark Grey Background */
+    --bg-panel: #27272a;
+    /* Slightly Lighter Grey Panel */
+    --text-main: #f3f4f6;
+    /* White Text */
+    --text-muted: #9ca3af;
+    /* Muted Grey Text */
+    --border: #3f3f46;
+    /* Dark Grey Border */
+    --accent: #3b82f6;
+    /* Brighter Blue for Contrast */
+    --input-bg: #27272a;
+    /* Dark Grey Input Background */
+    --msg-user: #3f3f46;
+    /* Dark Grey Bubble */
     --shadow: rgba(0, 0, 0, 0.5);
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+/* Invert Logo Color in Dark Mode */
+body.dark-mode .logo img {
+    filter: invert(1);
+    transition: filter 0.3s ease;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 body {
     font-family: 'Inter', sans-serif;
@@ -35,7 +62,11 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.app-container { display: flex; width: 100%; height: 100%; }
+.app-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
 
 /* --- SIDEBAR --- */
 .sidebar {
@@ -68,7 +99,8 @@ body {
 .icon-btn {
     background: transparent;
     border: none;
-    color: var(--text-main); /* Uses main text color so it's visible in dark mode */
+    color: var(--text-main);
+    /* Uses main text color so it's visible in dark mode */
     cursor: pointer;
     padding: 8px;
     border-radius: 50%;
@@ -78,12 +110,19 @@ body {
     transition: background 0.2s;
 }
 
-.icon-btn:hover { background: var(--border); }
-.theme-icon { width: 20px; height: 20px; }
+.icon-btn:hover {
+    background: var(--border);
+}
+
+.theme-icon {
+    width: 20px;
+    height: 20px;
+}
 
 /* BUTTONS */
 .primary-btn {
-    background-color: var(--text-main); /* Inverts automatically: Black in light, White in dark */
+    background-color: var(--text-main);
+    /* Inverts automatically: Black in light, White in dark */
     color: var(--bg-panel);
     border: none;
     padding: 12px;
@@ -93,10 +132,20 @@ body {
     font-size: 0.9rem;
     transition: opacity 0.2s;
 }
-.primary-btn:hover { opacity: 0.8; }
-.full-width { width: 100%; }
 
-.divider { height: 1px; background-color: var(--border); margin: 20px 0; }
+.primary-btn:hover {
+    opacity: 0.8;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.divider {
+    height: 1px;
+    background-color: var(--border);
+    margin: 20px 0;
+}
 
 .section-label {
     font-size: 0.75rem;
@@ -122,20 +171,36 @@ body {
     animation: pulse 1.5s infinite linear;
 }
 
-.skeleton-line.short { width: 60%; }
-
-@keyframes pulse {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
+.skeleton-line.short {
+    width: 60%;
 }
 
-.file-list { flex: 1; overflow-y: auto; }
-.empty-state { font-size: 0.85rem; color: var(--text-muted); font-style: italic; }
+@keyframes pulse {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.file-list {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.empty-state {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
 
 .file-item {
     font-size: 0.9rem;
     padding: 10px;
-    background-color: var(--bg-app); /* Matches main background */
+    background-color: var(--bg-app);
+    /* Matches main background */
     border: 1px solid var(--border);
     color: var(--text-main);
     border-radius: 6px;
@@ -199,7 +264,8 @@ body {
     display: flex;
     flex-direction: column;
     position: relative;
-    background-color: var(--bg-panel); /* Ensures main area changes color */
+    background-color: var(--bg-panel);
+    /* Ensures main area changes color */
     transition: background-color 0.3s;
 }
 
@@ -217,7 +283,11 @@ body {
     text-align: center;
     color: var(--text-muted);
 }
-.start-screen h1 { color: var(--text-main); margin-bottom: 10px; }
+
+.start-screen h1 {
+    color: var(--text-main);
+    margin-bottom: 10px;
+}
 
 /* MESSAGES */
 .message-row {
@@ -227,14 +297,18 @@ body {
     display: flex;
     gap: 15px;
 }
-.message-row.user { justify-content: flex-end; }
+
+.message-row.user {
+    justify-content: flex-end;
+}
 
 .bubble {
     padding: 14px 18px;
     border-radius: 12px;
     line-height: 1.5;
     max-width: 80%;
-    color: var(--text-main); /* Ensures text is visible */
+    color: var(--text-main);
+    /* Ensures text is visible */
 }
 
 .user .bubble {
@@ -272,7 +346,8 @@ body {
     padding: 14px;
     font-size: 1rem;
     background: transparent;
-    color: var(--text-main); /* Crucial for typing visibility */
+    color: var(--text-main);
+    /* Crucial for typing visibility */
 }
 
 .send-icon {
@@ -297,7 +372,8 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    pointer-events: none; /* Lets users click through the gap */
+    pointer-events: none;
+    /* Lets users click through the gap */
 }
 
 .toast {
@@ -314,16 +390,28 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
-    
+
     /* Animation settings */
     animation: slideIn 0.3s ease-out forwards;
     transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
 
 /* Toast Color Themes */
-.toast.success { border-left-color: #22c55e; } /* Green */
-.toast.error { border-left-color: #ef4444; }   /* Red */
-.toast.warning { border-left-color: #f59e0b; } /* Orange */
+.toast.success {
+    border-left-color: #22c55e;
+}
+
+/* Green */
+.toast.error {
+    border-left-color: #ef4444;
+}
+
+/* Red */
+.toast.warning {
+    border-left-color: #f59e0b;
+}
+
+/* Orange */
 
 /* Fade out class added by JavaScript */
 .toast.hide {
@@ -332,8 +420,15 @@ body {
 }
 
 @keyframes slideIn {
-    from { transform: translateX(120%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
+    from {
+        transform: translateX(120%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 /* --- MARKDOWN AI OUTPUT STYLES --- */
@@ -346,7 +441,8 @@ body {
     margin-bottom: 0;
 }
 
-.bubble ul, .bubble ol {
+.bubble ul,
+.bubble ol {
     margin-left: 20px;
     margin-bottom: 10px;
 }
@@ -366,7 +462,8 @@ body.dark-mode .bubble code {
 
 /* Code block formatting */
 .bubble pre {
-    background-color: #1e1e24; /* Deep dark background for code blocks */
+    background-color: #1e1e24;
+    /* Deep dark background for code blocks */
     color: #e4e4e7;
     padding: 16px;
     border-radius: 8px;
