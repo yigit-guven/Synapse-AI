@@ -101,7 +101,7 @@ if (resetBtn) {
         }
     });
 }
-//Joni Dani
+
 // --- CHAT HANDLER ---
 function handleSend() {
     const text = userInput.value.trim();
