@@ -236,7 +236,7 @@ function addMessage(text, sender, id = null) {
     bubble.classList.add('bubble');
 
     if (sender === 'bot') {
-        const htmlContent = text ? marked.parse(text) : "...";
+        const htmlContent = text ? marked.parse(text) : "Load";
         bubble.innerHTML = `<strong>Synapse AI:</strong><br>${htmlContent}`;
     } else {
         bubble.textContent = text;
