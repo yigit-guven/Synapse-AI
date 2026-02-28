@@ -349,7 +349,7 @@ body {
     transition: background-color 0.3s, border-color 0.3s;
 }
 
-.input-box input {
+.input-box textarea {
     flex: 1;
     border: none;
     outline: none;
@@ -357,7 +357,11 @@ body {
     font-size: 1rem;
     background: transparent;
     color: var(--text-main);
-    /* Crucial for typing visibility */
+    resize: none; /* Hides the drag handle in the corner */
+    font-family: inherit;
+    line-height: 1.5;
+    max-height: 150px; /* Stops it from growing taller than this */
+    overflow-y: auto;  /* Adds an internal scrollbar if they type a massive essay */
 }
 
 .send-icon {
@@ -491,8 +495,10 @@ body.dark-mode .bubble code {
     color: inherit;
 }
 
+
 /* --- DISABLED INPUT STATE --- */
-.input-box input:disabled {
+/* Changed 'input' to 'textarea' */
+.input-box textarea:disabled {
     cursor: not-allowed;
     opacity: 0.5;
 }
@@ -504,7 +510,8 @@ body.dark-mode .bubble code {
 }
 
 /* Ensure the wrapper also shows the not-allowed cursor */
-.input-box:has(input:disabled) {
+/* Changed 'input' to 'textarea' here too! */
+.input-box:has(textarea:disabled) {
     background-color: var(--bg-app);
     cursor: not-allowed;
 }

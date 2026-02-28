@@ -281,8 +281,19 @@ function removeLoading(id) {
 }
 
 sendBtn.addEventListener('click', handleSend);
-userInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') handleSend();
+// --- AUTO-RESIZE & KEYBOARD LOGIC FOR TEXTAREA ---
+userInput.addEventListener('input', function() {
+    this.style.height = 'auto'; // Reset height
+    this.style.height = (this.scrollHeight) + 'px'; // Expand to fit text
+});
+
+userInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault(); // Prevent a new line from forming
+        handleSend();
+        // Reset height after sending
+        userInput.style.height = 'auto'; 
+    }
 });
 
 // --- STATE MANAGEMENT ---
