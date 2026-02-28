@@ -369,12 +369,15 @@ body {
     color: white;
     border: none;
     width: 44px;
+    height: 44px; /* FIX 1: Lock the height so it never stretches */
+    align-self: flex-end; /* FIX 2: Anchor it to the bottom of the box */
     border-radius: 8px;
     cursor: pointer;
     font-size: 1.2rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0; /* Prevents the button from being squished by long text */
 }
 
 /* --- TOAST NOTIFICATIONS --- */
