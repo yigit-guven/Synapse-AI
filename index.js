@@ -158,35 +158,41 @@ async function handleSend() {
             throw new Error(errorData.detail || 'Chat failed');
         }
 
-        removeLoading(loadingId);
-
         // 3. Handle Streaming Response
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
 
-        let botMessageId = 'bot-' + Date.now();
-        addMessage("", 'bot', botMessageId); // Add empty bubble
-        const bubble = document.getElementById(botMessageId).querySelector('.bubble');
-
+        let botMessageId = null;
+        let bubble = null;
         let fullText = "";
+        
+        // NEW: A tracker to know when the AI actually starts talking
+        let isFirstChunk = true; 
 
         while (true) {
             const { done, value } = await reader.read();
+            
             if (done) {
-                // The stream is completely finished. 
-                // Re-render one last time WITHOUT the blinking cursor.
-                bubble.innerHTML = `<strong>Synapse AI:</strong><br>${marked.parse(fullText)}`;
+                // Remove the blinking cursor when completely finished
+                if (bubble) bubble.innerHTML = `<strong>Synapse AI:</strong><br>${marked.parse(fullText)}`;
                 break;
             }
 
-            // Decode the incoming chunk of text
+            // NEW LOGIC: Only remove the skeleton loader when the FIRST piece of text arrives!
+            if (isFirstChunk) {
+                removeLoading(loadingId); 
+                botMessageId = 'bot-' + Date.now();
+                addMessage("", 'bot', botMessageId); 
+                bubble = document.getElementById(botMessageId).querySelector('.bubble');
+                isFirstChunk = false;
+            }
+
+            // Decode and append the text
             const chunk = decoder.decode(value, { stream: true });
             fullText += chunk;
 
-            // Render the markdown AND append the animated cursor at the very end
+            // Render markdown with the blinking cursor attached
             bubble.innerHTML = `<strong>Synapse AI:</strong><br>${marked.parse(fullText)}<span class="blinking-cursor"></span>`;
-            
-            // Keep scrolling to the bottom as new text appears
             chatFeed.scrollTop = chatFeed.scrollHeight;
         }
 
