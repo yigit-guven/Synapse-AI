@@ -143,6 +143,8 @@ async function handleSend() {
     addMessage(text, 'user');
     userInput.value = '';
 
+    userInput.style.height = 'auto';
+
     // 2. Loading State
     const loadingId = showLoading();
 
