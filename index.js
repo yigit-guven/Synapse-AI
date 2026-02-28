@@ -172,13 +172,21 @@ async function handleSend() {
 
         while (true) {
             const { done, value } = await reader.read();
-            if (done) break;
+            if (done) {
+                // The stream is completely finished. 
+                // Re-render one last time WITHOUT the blinking cursor.
+                bubble.innerHTML = `<strong>Synapse AI:</strong><br>${marked.parse(fullText)}`;
+                break;
+            }
 
+            // Decode the incoming chunk of text
             const chunk = decoder.decode(value, { stream: true });
             fullText += chunk;
 
-            // Update bubble with parsed markdown
-            bubble.innerHTML = `<strong>Synapse AI:</strong><br>${marked.parse(fullText)}`;
+            // Render the markdown AND append the animated cursor at the very end
+            bubble.innerHTML = `<strong>Synapse AI:</strong><br>${marked.parse(fullText)}<span class="blinking-cursor"></span>`;
+            
+            // Keep scrolling to the bottom as new text appears
             chatFeed.scrollTop = chatFeed.scrollHeight;
         }
 

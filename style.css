@@ -508,3 +508,19 @@ body.dark-mode .bubble code {
     background-color: var(--bg-app);
     cursor: not-allowed;
 }
+
+/* --- STREAMING CURSOR --- */
+.blinking-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 16px;
+    background-color: var(--accent);
+    animation: blink 1s step-end infinite;
+    vertical-align: text-bottom;
+    margin-left: 4px;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
