@@ -351,14 +351,15 @@ body {
 
 .input-box textarea {
     flex: 1;
+    width: 100%; /* FIX 1: Forces the box to stretch across the entire empty space */
+    background-color: transparent !important; /* FIX 2: Forces it to stay invisible */
     border: none;
     outline: none;
-    padding: 10px 14px; /* Slightly adjusted padding for perfect vertical centering */
-    min-height: 44px; /* Matches the send button exactly */
+    padding: 10px 14px;
+    min-height: 44px;
     font-size: 1rem;
-    background: transparent;
     color: var(--text-main);
-    resize: none; 
+    resize: none; /* Keeps the drag handle hidden */
     font-family: inherit;
     line-height: 1.5;
     max-height: 150px; 
@@ -503,6 +504,8 @@ body.dark-mode .bubble code {
 /* --- DISABLED INPUT STATE --- */
 /* Changed 'input' to 'textarea' */
 .input-box textarea:disabled {
+    background-color: transparent !important; /* Strips away the default browser grey */
+    color: var(--text-muted);
     cursor: not-allowed;
     opacity: 0.5;
 }
