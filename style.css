@@ -538,3 +538,20 @@ body.dark-mode .bubble code {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
 }
+
+::-webkit-scrollbar {
+    width: 8px; /* Makes it thin and sleek */
+}
+
+::-webkit-scrollbar-track {
+    background: transparent; /* Hides the ugly white background */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--border); /* Uses your exact theme border color */
+    border-radius: 10px; /* Rounds the edges */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--text-muted); /* Darkens slightly when you hover */
+}
