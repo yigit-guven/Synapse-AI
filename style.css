@@ -1,5 +1,5 @@
 :root {
-    /* --- LIGHT MODE (Default Variables) --- */
+    
     --bg-app: #f3f4f6;
     /* Light Grey Background */
     --bg-panel: #ffffff;
@@ -110,7 +110,7 @@ body {
     background: transparent;
     border: none;
     color: var(--text-main);
-    /* Uses main text color so it's visible in dark mode */
+    
     cursor: pointer;
     padding: 8px;
     border-radius: 50%;
@@ -165,7 +165,7 @@ body {
     margin-bottom: 12px;
 }
 
-/* SKELETON LOADER ANIMATION */
+
 .skeleton-container {
     display: flex;
     flex-direction: column;
@@ -540,18 +540,18 @@ body.dark-mode .bubble code {
 }
 
 ::-webkit-scrollbar {
-    width: 8px; /* Makes it thin and sleek */
+    width: 8px; 
 }
 
 ::-webkit-scrollbar-track {
-    background: transparent; /* Hides the ugly white background */
+    background: transparent; 
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: var(--border); /* Uses your exact theme border color */
-    border-radius: 10px; /* Rounds the edges */
+    background-color: var(--border); 
+    border-radius: 10px; 
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--text-muted); /* Darkens slightly when you hover */
+    background-color: var(--text-muted); 
 }

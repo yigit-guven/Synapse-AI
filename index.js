@@ -5,10 +5,10 @@ const sendBtn = document.getElementById('send-btn');
 const uploadBtn = document.getElementById('upload-btn');
 const fileInput = document.getElementById('file-input');
 const fileList = document.getElementById('file-list');
-const resetBtn = document.getElementById('reset-btn'); // New Reset Button
+const resetBtn = document.getElementById('reset-btn'); 
 const startScreen = document.querySelector('.start-screen');
 const themeToggle = document.getElementById('theme-toggle');
-//Joni
+
 const MAX_FILE_SIZE_MB = 10;
 const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
 
@@ -53,7 +53,7 @@ fileInput.addEventListener('change', async (e) => {
         }
     }
 
-    // Optimistic UI update
+   
     const emptyState = document.querySelector('.empty-state');
     if (emptyState) emptyState.remove();
 
@@ -72,12 +72,12 @@ fileInput.addEventListener('change', async (e) => {
         // FIX: Create the FormData object and attach the files
         const formData = new FormData();
         files.forEach(file => {
-            formData.append('files', file); // 'files' is the key your Python backend will look for
+            formData.append('files', file); 
         });
 
         const response = await fetch('/api/ingest', {
             method: 'POST',
-            body: formData // Now this works!
+            body: formData 
         });
 
         removeLoading(loadingId);
@@ -85,12 +85,10 @@ fileInput.addEventListener('change', async (e) => {
         if (!response.ok) throw new Error('Ingestion failed');
         const result = await response.json();
 
-        // --- ENABLE UI AFTER SUCCESSFUL UPLOAD ---
         userInput.disabled = false;
         sendBtn.disabled = false;
         userInput.placeholder = "Ask about your documents...";
 
-        // Update UI to show success
         const fileItems = fileList.querySelectorAll('.file-item span');
         fileItems.forEach(span => span.textContent = '📄');
 
@@ -104,7 +102,6 @@ fileInput.addEventListener('change', async (e) => {
     }
 });
 
-// --- RESET HANDLER ---
 if (resetBtn) {
     resetBtn.addEventListener('click', async () => {
         if (!confirm('Are you sure you want to clear the entire database?')) return;
@@ -120,7 +117,7 @@ if (resetBtn) {
                 startScreen.style.display = 'block';
             }
 
-            // Re-disable input after reset
+            
             userInput.disabled = true;
             sendBtn.disabled = true;
             userInput.placeholder = "Upload a document to unlock chat...";
@@ -139,13 +136,13 @@ async function handleSend() {
 
     if (startScreen) startScreen.style.display = 'none';
 
-    // 1. Show User Message
+    //Show User Message
     addMessage(text, 'user');
     userInput.value = '';
 
     userInput.style.height = 'auto';
 
-    // 2. Loading State
+    //Loading State
     const loadingId = showLoading();
 
     try {
@@ -160,7 +157,7 @@ async function handleSend() {
             throw new Error(errorData.detail || 'Chat failed');
         }
 
-        // 3. Handle Streaming Response
+        //Handle Streaming Response
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
 
@@ -168,7 +165,7 @@ async function handleSend() {
         let bubble = null;
         let fullText = "";
         
-        // NEW: A tracker to know when the AI actually starts talking
+        // A tracker to know when the AI actually starts talking
         let isFirstChunk = true; 
 
         while (true) {
@@ -189,7 +186,7 @@ async function handleSend() {
                 isFirstChunk = false;
             }
 
-            // Decode and append the text
+            
             const chunk = decoder.decode(value, { stream: true });
             fullText += chunk;
 
@@ -205,7 +202,7 @@ async function handleSend() {
     }
 }
 
-// --- TOAST NOTIFICATION SYSTEM ---
+
 // --- TOAST NOTIFICATION SYSTEM ---
 function showToast(message, type = 'info') {
     const container = document.getElementById('toast-container');
@@ -224,11 +221,9 @@ function showToast(message, type = 'info') {
 
     container.appendChild(toast);
 
-    // Auto-remove after 3 seconds (3000 milliseconds)
     setTimeout(() => {
-        toast.classList.add('hide'); // Starts the slide-out animation
+        toast.classList.add('hide'); 
 
-        // Bulletproof removal: Wait exactly 300ms (the length of the CSS animation) then delete
         setTimeout(() => {
             toast.remove();
         }, 300);
@@ -283,17 +278,17 @@ function removeLoading(id) {
 }
 
 sendBtn.addEventListener('click', handleSend);
-// --- AUTO-RESIZE & KEYBOARD LOGIC FOR TEXTAREA ---
+
 userInput.addEventListener('input', function() {
-    this.style.height = 'auto'; // Reset height
-    this.style.height = (this.scrollHeight) + 'px'; // Expand to fit text
+    this.style.height = 'auto'; 
+    this.style.height = (this.scrollHeight) + 'px'; 
 });
 
 userInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault(); // Prevent a new line from forming
+        e.preventDefault(); 
         handleSend();
-        // Reset height after sending
+        
         userInput.style.height = 'auto'; 
     }
 });
@@ -303,7 +298,7 @@ function enableChatInput() {
     userInput.disabled = false;
     sendBtn.disabled = false;
     userInput.placeholder = "Ask a question about your documents...";
-    userInput.focus(); // Automatically put the cursor in the box for them!
+    userInput.focus(); 
 }
 
 function disableChatInput() {
